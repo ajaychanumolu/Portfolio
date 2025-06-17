@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Ajay Chanumolu</title>
+    <link rel="icon" href="./assets/favicon.png" type="image/png">
+    <style>
+        /* CSS Variables for Theme */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --accent-color: #6366f1;
+            --accent-hover: #4f46e5;
+            --border-color: #e2e8f0;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --button-bg: rgba(99, 102, 241, 0.1);
+            --button-hover: rgba(99, 102, 241, 0.2);
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --glass-bg: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.18);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f0f23;
+            --bg-secondary: #1a1a2e;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --accent-color: #818cf8;
+            --accent-hover: #6366f1;
+            --border-color: #374151;
+            --card-bg: rgba(26, 26, 46, 0.8);
+            --button-bg: rgba(129, 140, 248, 0.1);
+            --button-hover: rgba(129, 140, 248, 0.2);
+            --glass-bg: rgba(26, 26, 46, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: float 20s infinite linear;
+        }
+
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            background: var(--gradient-1);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            background: var(--gradient-2);
+            top: 60%;
+            right: 10%;
+            animation-delay: -7s;
+        }
+
+        .shape:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            background: var(--gradient-3);
+            bottom: 20%;
+            left: 30%;
+            animation-delay: -14s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            z-index: 1000;
+            padding: 12px 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 25px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            background: var(--button-bg);
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle {
+            background: var(--button-bg);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 15px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-toggle:hover {
+            background: var(--button-hover);
+            transform: scale(1.05);
+        }
+
+        /* Main Container */
+        .portfolio-container {
+            padding: 120px 5% 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header Section */
+        .header-section {
+            text-align: center;
+            margin-bottom: 120px;
+            position: relative;
+        }
+
+        .profile-image {
+            margin-left: 500px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 32px;
+            border: 4px solid transparent;
+            background: var(--gradient-1);
+            padding: 4px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, var(--accent-color), transparent);
+            animation: rotate 3s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: slideUp 0.8s ease-out 0.2s forwards;
+        }
+
+        .main-title {
+            font-size: clamp(3rem, 8vw, 5rem);
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: slideUp 0.8s ease-out 0.4s forwards;
+        }
+
+        .highlight {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .description {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 48px;
+            opacity: 0;
+            animation: slideUp 0.8s ease-out 0.6s forwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .glass-card:hover::before {
+            left: 100%;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+            border-color: var(--accent-color);
+        }
+        .resume-button {
+    background-color: #6c63ff;
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.resume-button:hover {
+    background-color: #574fd6;
+}
+
+        /* Social Media Section */
+        .social-section {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 120px;
+            flex-wrap: wrap;
+        }
+
+        .social-button {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 12px 24px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-button:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: 120px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 48px;
+            text-align: center;
+        }
+
+        .section-title .highlight {
+            position: relative;
+        }
+
+        /* Grid Layouts */
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        /* About Section */
+        .about-content {
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Skills Section */
+        .skill-category h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: var(--button-bg);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Work Items */
+        .work-item {
+            position: relative;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1rem;
+        }
+
+        .work-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .work-title a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .work-title a:hover {
+            color: var(--accent-color);
+        }
+
+        .work-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .work-extra {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        /* Achievement Cards */
+        .achievement-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .achievement-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .achievement-description {
+            color: var(--text-secondary);
+        }
+
+        /* Contact Section */
+        .contact-info {
+            text-align: center;
+            margin-bottom: 48px;
+            font-size: 1.1rem;
+        }
+
+        .contact-info a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-container {
+                gap: 1rem;
+            }
+
+            .portfolio-container {
+                padding: 100px 5% 60px;
+            }
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .social-section {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--border-color);
+            border-top: 3px solid var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo"></div>
+           <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#work">Projects</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#contact">Contact</a></li>
+</ul>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <span id="theme-icon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="portfolio-container">
+        <!-- Header Section -->
+        <header class="header-section">
+            <div class="profile-image">
+                <img src="./assets/ajay-avatar.png" alt="Ajay Chanumolu">
+            </div>
+            <h3 class="subtitle">Hey, I'm Ajay Chanumolu</h3>
+            <h1 class="main-title">ML & MLOps Enthusiast  <span class="highlight">Building AI-driven Automations</span></h1>
+            <p class="description">
+            Intern @ Truviq Systems · n8n Automator · Java & Python Developer · Executive Body @ ACE · SRKREC '26
+            </p>
+
+            <div class="contact-info">
+                <p>Let's connect → <a href="mailto:chanumoluajay@gmail.com">chanumoluajay@gmail.com</a></p>
+            </div>
+        </header>
+
+        <!-- Social Media Section -->
+        <section class="social-section">
+           
+            <a href="https://github.com/ajaychanumolu" class="social-button" target="_blank">
+                <span>💻</span> GitHub
+            </a>
+            <a href="https://linkedin.com/in/ajaychanumolu" class="social-button" target="_blank">
+                <span>💼</span> LinkedIn
+            </a>
+            <a href="mailto:chanumoluajay@gmail.com" class="social-button">
+                <span>📧</span> Email
+            </a>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section fade-in">
+            <h2 class="section-title">About <span class="highlight">Me</span></h2>
+            <div class="glass-card">
+                <div class="about-content">
+                    <p>I'm a dedicated Artificial Intelligence and Machine Learning student with a strong foundation in software development and a growing passion for ML, MLOps, and automation. I enjoy building intelligent systems that solve real-world problems—ranging from deepfake detection to recruitment automation. Currently interning at Truviq Systems, I actively work on end-to-end workflows using tools like n8n, Gemini, and Pinecone, while continuing to contribute to open-source and lead initiatives as part of the ACE Club at SRKREC. I'm always exploring new technologies to enhance my skill set and make meaningful contributions to the tech community.
+
+</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+<section id="skills" class="section fade-in">
+  <h2 class="section-title">Skills & <span class="highlight">Technologies</span></h2>
+  <div class="grid grid-3">
+
+    <!-- Machine Learning -->
+    <div class="glass-card skill-category">
+      <h3>Machine Learning</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Scikit-learn</span>
+        <span class="skill-tag">Pandas</span>
+        <span class="skill-tag">Matplotlib</span>
+        <span class="skill-tag">Gradio</span>
+        <span class="skill-tag">Streamlit</span>
+      </div>
+    </div>
+
+    <!-- Deep Learning -->
+    <div class="glass-card skill-category">
+      <h3>Deep Learning</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">TensorFlow</span>
+        <span class="skill-tag">Keras</span>
+        <span class="skill-tag">PyTorch</span>
+        <span class="skill-tag">CNN</span>
+        <span class="skill-tag">LSTM</span>
+      </div>
+    </div>
+
+    <!-- Tools & DevOps -->
+    <div class="glass-card skill-category">
+      <h3>Tools</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">n8n</span>
+        <span class="skill-tag">Google Cloud</span>
+        <span class="skill-tag">Azure VM</span>
+        <span class="skill-tag">Pinecone</span>
+        <span class="skill-tag">Gemini API</span>
+      </div>
+    </div>
+
+   
+
+    <!-- CS Fundamentals -->
+    <div class="glass-card skill-category">
+      <h3>CS Fundamentals</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Data Structures</span>
+        <span class="skill-tag">Algorithms</span>
+        <span class="skill-tag">OOPs</span>
+        <span class="skill-tag">Operating System</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+       <!-- Work Section -->
+<section id="work" class="section fade-in">
+  <h2 class="section-title">Featured <span class="highlight">Projects</span></h2>
+  <div class="grid grid-2">
+
+    <!-- DeepTrace Project -->
+    <div class="glass-card work-item">
+      <h3 class="work-title">
+        <a href="https://github.com/ajaychanumolu/DeepTrace" target="_blank">DeepTrace: Multi-Modal Deepfake Detection</a>
+      </h3>
+      <p class="work-description">
+        Built a deepfake detection system combining ResNeXt+LSTM for video, CNN for audio, and DenseNet121 for images, achieving high accuracy across modalities.
+      </p>
+      <p class="work-extra">Python • PyTorch • TensorFlow • OpenCV</p>
+    </div>
+
+    <!-- Sclerosis Disease Prediction -->
+    <div class="glass-card work-item">
+      <h3 class="work-title">
+        <a href="https://github.com/ajaychanumolu/Sclerosis_Disease_Prediction" target="_blank">Sclerosis Disease Prediction</a>
+      </h3>
+      <p class="work-description">
+        Developed a Random Forest Classifier with RFE and hyperparameter tuning to predict sclerosis progression with 87.2% accuracy, evaluated using ROC-AUC.
+      </p>
+      <p class="work-extra">Scikit-learn • Pandas • Matplotlib • Gradio</p>
+    </div>
+
+    <!-- Chat with PDF using AI -->
+    <div class="glass-card work-item">
+      <h3 class="work-title">
+        <a href="https://github.com/ajaychanumolu/Chat-with-PDF-using-AI-n8n-Workflow" target="_blank">Chat with PDF using AI</a>
+      </h3>
+      <p class="work-description">
+        Automated workflow to extract content from PDFs, embed using Gemini API, store in Pinecone vector DB, and answer user queries via AI.
+      </p>
+      <p class="work-extra">n8n • Gemini API • Pinecone • Google Drive</p>
+    </div>
+
+    <!-- AI-Powered Tweet Summarizer -->
+    <div class="glass-card work-item">
+      <h3 class="work-title">
+        <a href="https://github.com/ajaychanumolu/tweet-summarizer-n8n" target="_blank">AI-Powered Tweet Summarizer</a>
+      </h3>
+      <p class="work-description">
+        Created a no-code workflow to extract tweets, summarize them with Gemini, analyze sentiment, and log results to Google Sheets.
+      </p>
+      <p class="work-extra">n8n • Apify • Gemini API • Google Sheets</p>
+    </div>
+
+  </div>
+</section>
+
+
+    <!-- Achievements Section -->
+<section id="achievements" class="section fade-in">
+  <h2 class="section-title">Achievements & <span class="highlight">Recognition</span></h2>
+  <div class="grid grid-3">
+
+    <!-- ACE Executive -->
+    <div class="glass-card" style="text-align: center;">
+      <div class="achievement-icon">🏅</div>
+      <h3 class="achievement-title">Leadership in ACE Club</h3>
+      <p class="achievement-description">Serving as Executive Body Member of ACE (2024–25), leading technical and community initiatives.</p>
+    </div>
+
+    <!-- GDSC Android Core -->
+    <div class="glass-card" style="text-align: center;">
+      <div class="achievement-icon">🤝</div>
+      <h3 class="achievement-title">GDSC Android Core Member</h3>
+      <p class="achievement-description">Part of Google Developer Student Club Android Team, contributing to peer learning and workshops.</p>
+    </div>
+
+    <!-- IIT JEE Achievement -->
+    <div class="glass-card" style="text-align: center;">
+      <div class="achievement-icon">🎓</div>
+      <h3 class="achievement-title">Qualified IIT JEE</h3>
+      <p class="achievement-description">Secured a qualifying rank in India's prestigious IIT-JEE examination, demonstrating academic excellence and dedication.</p>
+    </div>
+
+  </div>
+</section>
+<!-- Resume Section -->
+<section id="resume" class="section fade-in">
+  <h2 class="section-title">My <span class="highlight">Resume</span></h2>
+  <div class="glass-card" style="text-align: center; padding: 20px;">
+    <p>You can view or download my resume below.</p>
+    <div style="margin-top: 20px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+      <a href="https://drive.google.com/file/d/15pRd_A7Iq2nzxGBFnl-IM5moe7LO9H1d/view?usp=sharing" target="_blank" class="resume-button">
+        📄 View Resume
+      </a>
+      <a href="https://drive.google.com/u/0/uc?id=15pRd_A7Iq2nzxGBFnl-IM5moe7LO9H1d&export=download" class="resume-button" download>
+        ⬇️ Download Resume
+      </a>
+    </div>
+  </div>
+</section>
+<!-- Contact Me Section -->
+<section id="contact" class="section fade-in">
+  <h2 class="section-title">Contact <span class="highlight">Me</span></h2>
+  <p style="text-align: center; margin-top: 10px;">Feel free to reach out via email or connect with me on LinkedIn.</p>
+  
+  <div style="margin-top: 20px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; font-size: 16px;">
+    <a href="mailto:chanumoluajay@gmail.com" style="text-decoration: none; color: #00bcd4;">📧 chanumoluajay@gmail.com</a>
+    <a href="https://www.linkedin.com/in/ajaychanumolu" target="_blank" style="text-decoration: none; color: #00bcd4;">🔗 LinkedIn</a>
+    <a href="tel:+918074177736" style="text-decoration: none; color: #00bcd4;">📱 +91 8074177736</a>
+  </div>
+</section>
+
+
+    <script>
+        // Theme Toggle Functionality
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            const themeIcon = document.getElementById('theme-icon');
+            
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+            }
+
+            // Hide loader
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add hover effect to cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Parallax effect for floating shapes
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const shapes = document.querySelectorAll('.shape');
+            
+            shapes.forEach((shape, index) => {
+                const speed = 0.5 + (index * 0.1);
+                shape.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+    </script>
+    <!-- 1. Add Lucide CDN in <head> -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- 2. HTML Button with Lucide Icon -->
+<button id="theme-toggle" onclick="toggleTheme()" class="theme-toggle-button" aria-label="Toggle theme">
+    <i id="theme-icon" data-lucide="moon"></i>
+</button>
+
+<!-- 3. CSS for Button Styling -->
+<style>
+.theme-toggle-button {
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--text-color, #222);
+    transition: transform 0.2s ease;
+}
+
+.theme-toggle-button:hover {
+    transform: scale(1.15);
+}
+
+.theme-toggle-button i {
+    width: 24px;
+    height: 24px;
+}
+</style>
+
+<!-- 4. JavaScript Logic for Theme Toggle -->
+<script>
+    function toggleTheme() {
+        const body = document.body;
+        const themeIcon = document.getElementById('theme-icon');
+
+        if (body.getAttribute('data-theme') === 'dark') {
+            body.removeAttribute('data-theme');
+            themeIcon.setAttribute('data-lucide', 'moon');
+            localStorage.setItem('theme', 'light');
+        } else {
+            body.setAttribute('data-theme', 'dark');
+            themeIcon.setAttribute('data-lucide', 'sun');
+            localStorage.setItem('theme', 'dark');
+        }
+
+        // Re-render the icon after change
+        lucide.createIcons();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme');
+        const themeIcon = document.getElementById('theme-icon');
+
+        if (savedTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            themeIcon.setAttribute('data-lucide', 'sun');
+        } else {
+            themeIcon.setAttribute('data-lucide', 'moon');
+        }
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+    });
+</script>
+
+</body>
+
+</html>
