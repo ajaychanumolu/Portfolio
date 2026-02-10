@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Portfolio of Ajay Chanumolu - AI/ML Engineer & Automation Developer">
     <title>Ajay Chanumolu | AI & Automation Engineer</title>
     <link rel="icon" href="./assets/favicon.png" type="image/png">
 
@@ -14,49 +15,111 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        /* ========================================
-           1. THEME VARIABLES & BASICS
-           ======================================== */
+        /* ========================================================================
+           1. THEME VARIABLES (The "21st.dev" Aesthetic)
+           ======================================================================== */
         :root {
-            /* Light Mode */
+            /* Light Mode Palette */
             --bg-body: #ffffff;
-            --bg-card: rgba(255, 255, 255, 0.5);
-            --border-color: #e4e4e7;
-            --text-primary: #18181b;
-            --text-secondary: #52525b;
-            --accent: #4f46e5; /* Indigo 600 */
+            --bg-subtle: #f4f4f5; /* Zinc 100 */
+            --bg-glass: rgba(255, 255, 255, 0.6);
+            --bg-card: rgba(255, 255, 255, 0.8);
+            
+            --border-color: #e4e4e7; /* Zinc 200 */
+            --border-hover: #d4d4d8; /* Zinc 300 */
+            
+            --text-primary: #18181b; /* Zinc 900 */
+            --text-secondary: #52525b; /* Zinc 600 */
+            --text-muted: #a1a1aa; /* Zinc 400 */
+            
+            --accent-primary: #4f46e5; /* Indigo 600 */
+            --accent-glow: rgba(79, 70, 229, 0.15);
             --accent-rgb: 79, 70, 229;
+            
+            /* Gradient for Highlights */
+            --gradient-1: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --spotlight-color: rgba(0, 0, 0, 0.05);
+            
+            /* Sizing */
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
         }
 
         .dark {
-            /* Dark Mode (Zinc/Slate) */
-            --bg-body: #09090b;
-            --bg-card: rgba(24, 24, 27, 0.6); /* Zinc 900 with opacity */
-            --border-color: #27272a;
-            --text-primary: #fafafa;
-            --text-secondary: #a1a1aa;
-            --accent: #818cf8; /* Indigo 400 */
+            /* Dark Mode Palette (Deep Zinc/Slate) */
+            --bg-body: #09090b; /* Zinc 950 */
+            --bg-subtle: #18181b; /* Zinc 900 */
+            --bg-glass: rgba(9, 9, 11, 0.6);
+            --bg-card: rgba(20, 20, 22, 0.6); /* Translucent dark */
+            
+            --border-color: #27272a; /* Zinc 800 */
+            --border-hover: #3f3f46; /* Zinc 700 */
+            
+            --text-primary: #fafafa; /* Zinc 50 */
+            --text-secondary: #a1a1aa; /* Zinc 400 */
+            --text-muted: #52525b; /* Zinc 600 */
+            
+            --accent-primary: #818cf8; /* Indigo 400 */
+            --accent-glow: rgba(129, 140, 248, 0.15);
             --accent-rgb: 129, 140, 248;
+            
+            --gradient-1: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+            
+            --shadow-sm: none;
+            --shadow-lg: 0 0 0 1px var(--border-color);
             --spotlight-color: rgba(255, 255, 255, 0.1);
         }
 
+        /* ========================================================================
+           2. GLOBAL RESET & BASE STYLES
+           ======================================================================== */
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         html { scroll-behavior: smooth; }
         
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-body);
             color: var(--text-primary);
-            line-height: 1.6;
+            line-height: 1.8; /* Spacious reading */
             overflow-x: hidden;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* ========================================
-           2. ANIMATED GRID PATTERN (Magic UI)
-           ======================================== */
-        .animated-grid {
+        h1, h2, h3, h4 {
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        a { text-decoration: none; color: inherit; transition: all 0.2s ease; }
+        ul { list-style: none; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .highlight {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        /* ========================================================================
+           3. BACKGROUND EFFECTS (Mix: Grid + Blobs)
+           ======================================================================== */
+        
+        /* Effect A: Animated Grid (Foreground Texture) */
+        .bg-grid {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
@@ -68,36 +131,251 @@
             /* Fade out edges using mask */
             mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
             -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
-            opacity: 0.2;
-            /* Animation */
-            animation: grid-scroll 40s linear infinite;
+            opacity: 0.15; /* Subtle */
+            pointer-events: none;
+            animation: grid-scroll 60s linear infinite;
         }
 
         @keyframes grid-scroll {
-            0% { transform: translateY(0) translateX(0); }
-            100% { transform: translateY(50px) translateX(50px); }
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
         }
 
-        /* ========================================
-           3. GLOWING EFFECT CARDS (Aceternity)
-           ======================================== */
-        /* Wrapper for mouse tracking */
-        .glow-container {
+        /* Effect B: Floating Blobs (Background Color) */
+        .bg-blobs {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2; /* Behind grid */
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s infinite linear;
+        }
+
+        .blob-1 {
+            width: 500px; height: 500px;
+            background: var(--accent-primary);
+            top: -10%; left: -10%;
+        }
+
+        .blob-2 {
+            width: 400px; height: 400px;
+            background: #7c3aed; /* Violet */
+            bottom: 10%; right: -5%;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(30px, 40px) rotate(10deg); }
+        }
+
+        /* ========================================================================
+           4. NAVIGATION (Limelight Pill Style)
+           ======================================================================== */
+        .nav-wrapper {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* The Pill Container */
+        .nav-container {
+            position: relative;
+            background: rgba(var(--bg-body), 0.01); /* Glass */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 100px;
+            padding: 6px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+        }
+
+        /* The Sliding Spotlight */
+        #nav-spotlight {
+            position: absolute;
+            top: 6px; left: 6px;
+            height: calc(100% - 12px);
+            border-radius: 100px;
+            background: var(--spotlight-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .nav-links {
+            position: relative;
+            display: flex;
+            z-index: 2;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 10px 24px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: color 0.3s;
+            border-radius: 100px;
+        }
+
+        .nav-link:hover { color: var(--text-primary); }
+        .nav-link.active { color: var(--text-primary); font-weight: 600; }
+
+        /* Theme Toggle (Separate Circle) */
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: 0.3s;
+            backdrop-filter: blur(12px);
+        }
+        .theme-toggle:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+
+        /* ========================================================================
+           5. HERO SECTION (Dynamic Tag & Gradient Buttons)
+           ======================================================================== */
+        .hero {
+            padding-top: 180px;
+            padding-bottom: 120px;
+            text-align: center;
             position: relative;
         }
 
+        /* Rotating Profile Glow */
+        .profile-container {
+            position: relative;
+            width: 160px; height: 160px;
+            margin: 0 auto 40px;
+        }
+        .profile-glow {
+            position: absolute; inset: -4px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            filter: blur(15px);
+            opacity: 0.6;
+            animation: spin 6s linear infinite;
+            z-index: -1;
+        }
+        .profile-img {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--bg-body);
+            background: var(--bg-subtle);
+        }
+
+        /* Dynamic Status Tag */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            background: var(--accent-glow);
+            border: 1px solid rgba(129, 140, 248, 0.3);
+            border-radius: 100px;
+            color: var(--accent-primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 32px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .status-dot {
+            width: 8px; height: 8px;
+            background: currentColor;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        /* Fade transition for text changing */
+        #dynamic-text {
+            transition: opacity 0.5s ease;
+        }
+        .fade-out { opacity: 0; }
+        .fade-in { opacity: 1; }
+
+
+        .hero h1 { font-size: clamp(3rem, 6vw, 5rem); margin-bottom: 24px; font-weight: 800; }
+        .hero p { font-size: 1.3rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 48px; }
+
+        /* Hover Border Gradient Button */
+        .gradient-btn {
+            position: relative;
+            padding: 14px 32px;
+            border-radius: 99px;
+            background: var(--bg-body);
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            display: inline-flex; align-items: center; gap: 8px;
+            text-decoration: none;
+            overflow: hidden;
+            border: 1px solid transparent; /* Placeholder */
+        }
+        
+        .gradient-btn::before {
+            content: "";
+            position: absolute; inset: -3px; z-index: -1;
+            background: conic-gradient(from 90deg at 50% 50%, transparent 0%, var(--accent-primary) 50%, transparent 100%);
+            animation: spin 3s linear infinite;
+            opacity: 0; transition: opacity 0.3s;
+        }
+        
+        .gradient-btn-bg {
+            position: absolute; inset: 1px; background: var(--bg-body); border-radius: 99px; z-index: -1;
+        }
+
+        .gradient-btn:hover::before { opacity: 1; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* ========================================================================
+           6. SECTIONS & SPOTLIGHT CARDS
+           ======================================================================== */
+        section { padding: 100px 0; }
+        .section-header { margin-bottom: 60px; }
+        .section-header p { font-family: 'JetBrains Mono', monospace; color: var(--accent-primary); margin-bottom: 8px; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 700; }
+
+        /* Spotlight Card Logic */
+        .spotlight-group { position: relative; } /* Container */
+        
         .glass-card {
             position: relative;
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
+            border-radius: var(--radius-lg);
             padding: 32px;
             overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+            display: flex; flex-direction: column;
             backdrop-filter: blur(10px);
-            transition: border-color 0.3s;
         }
 
-        /* The Glow Spot */
+        /* The "Spotlight" Gradient Overlay */
         .glass-card::before {
             content: "";
             position: absolute;
@@ -106,7 +384,7 @@
             border-radius: inherit;
             background: radial-gradient(
                 800px circle at var(--mouse-x) var(--mouse-y), 
-                rgba(var(--accent-rgb), 0.1), 
+                rgba(var(--accent-rgb), 0.06), 
                 transparent 40%
             );
             opacity: 0;
@@ -115,7 +393,7 @@
             z-index: 2;
         }
 
-        /* The Border Glow */
+        /* The Border Highlight */
         .glass-card::after {
             content: "";
             position: absolute;
@@ -124,374 +402,382 @@
             border-radius: inherit;
             background: radial-gradient(
                 600px circle at var(--mouse-x) var(--mouse-y), 
-                rgba(var(--accent-rgb), 0.4), 
+                rgba(var(--accent-rgb), 0.3), 
                 transparent 40%
             );
             opacity: 0;
             transition: opacity 0.5s;
             z-index: 1;
-            /* Place behind content but above background */
-            mix-blend-mode: overlay; 
+            mix-blend-mode: overlay;
         }
 
-        .glow-container:hover .glass-card::before,
-        .glow-container:hover .glass-card::after {
-            opacity: 1;
-        }
-
-        /* Ensure content is above glow */
-        .card-content {
-            position: relative;
-            z-index: 10;
-        }
-
-        /* ========================================
-           4. HOVER BORDER GRADIENT (Aceternity)
-           ======================================== */
-        .gradient-btn {
-            position: relative;
-            padding: 12px 24px;
-            border-radius: 99px;
-            background: var(--bg-body);
-            color: var(--text-primary);
-            font-weight: 600;
-            cursor: pointer;
-            border: 1px solid transparent; /* Placeholder */
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            overflow: hidden;
-            text-decoration: none;
-        }
-
-        /* Rotating Gradient Border */
-        .gradient-btn::before {
-            content: "";
-            position: absolute;
-            inset: -2px; /* Extend outside */
-            z-index: -1;
-            background: conic-gradient(
-                from 90deg at 50% 50%,
-                #E2E8F0 0%,
-                #5046e6 50%,
-                #E2E8F0 100%
-            );
-            animation: spin 3s linear infinite;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        /* Inner mask to show only border */
-        .gradient-btn-inner {
-            position: absolute;
-            inset: 1px;
-            background: var(--bg-body);
-            border-radius: 99px;
-            z-index: -1;
-        }
-
-        .gradient-btn:hover::before {
-            opacity: 1;
-        }
-
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-        /* ========================================
-           5. LIMELIGHT NAV (Easemize)
-           ======================================== */
-        .nav-wrapper {
-            position: fixed;
-            top: 24px; left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            background: rgba(var(--bg-body), 0.01); /* Transparent for glass feel */
-            border: 1px solid var(--border-color);
-            border-radius: 100px;
-            padding: 8px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 4px 20px -5px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .nav-links {
-            position: relative;
-            display: flex;
-            list-style: none;
-            padding: 0; margin: 0;
-        }
-
-        /* The Moving Spotlight */
-        #nav-spotlight {
-            position: absolute;
-            top: 0; left: 0;
-            height: 100%;
-            border-radius: 100px;
-            background: var(--spotlight-color);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1;
-            opacity: 0; /* Hidden initially */
-        }
-
-        .nav-item {
-            position: relative;
-            z-index: 2;
-        }
-
-        .nav-link {
-            display: block;
-            padding: 8px 16px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            color: var(--text-primary);
-        }
-
-        /* Theme Toggle in Nav */
-        .theme-toggle {
-            background: transparent;
-            border: none;
-            padding: 8px;
-            border-radius: 50%;
-            cursor: pointer;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            transition: 0.3s;
-            z-index: 2;
-        }
-        .theme-toggle:hover { background: var(--spotlight-color); }
-
-        /* ========================================
-           6. GENERAL UTILITIES
-           ======================================== */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-        .grid { display: grid; gap: 24px; }
-        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); }
-        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .spotlight-group:hover .glass-card::before,
+        .spotlight-group:hover .glass-card::after { opacity: 1; }
         
-        section { padding: 100px 0; }
-        h1, h2, h3 { color: var(--text-primary); letter-spacing: -0.02em; }
-        h1 { font-size: clamp(3rem, 5vw, 4.5rem); line-height: 1.1; font-weight: 800; margin-bottom: 24px; }
-        p { color: var(--text-secondary); }
-        .highlight { color: var(--accent); }
+        .card-content { position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; }
 
-        /* Loader */
+        /* ========================================================================
+           7. GRIDS & LAYOUTS
+           ======================================================================== */
+        .grid { display: grid; gap: 24px; }
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+
+        /* Skills Styling */
+        .skill-group h3 { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; font-size: 1.1rem; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+            padding: 6px 12px; border-radius: 6px;
+            background: var(--bg-subtle); border: 1px solid var(--border-color);
+            color: var(--text-secondary); transition: 0.3s;
+        }
+        .tag:hover { border-color: var(--accent-primary); color: var(--accent-primary); background: var(--accent-glow); }
+
+        /* Timeline Styling */
+        .timeline-item {
+            position: relative; padding-left: 40px; margin-bottom: 48px;
+            border-left: 2px solid var(--border-color);
+        }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -8px; top: 6px;
+            width: 14px; height: 14px; background: var(--bg-body);
+            border: 3px solid var(--accent-primary); border-radius: 50%;
+        }
+        .timeline-role { font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; }
+        .timeline-company { color: var(--accent-primary); font-weight: 500; font-size: 1rem; margin-bottom: 12px; display: block; }
+        .timeline-desc { font-size: 1.05rem; color: var(--text-secondary); max-width: 800px; }
+
+        /* Projects Styling */
+        .project-header { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .project-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 12px; }
+        .project-desc { font-size: 1rem; color: var(--text-secondary); margin-bottom: 24px; flex-grow: 1; }
+        .tech-stack { font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--text-muted); display: flex; gap: 12px; flex-wrap: wrap; margin-top: auto; }
+
+        /* Resume Banner */
+        .resume-banner {
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-card) 0%, rgba(var(--accent-rgb), 0.05) 100%);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 80px 0; border-top: 1px solid var(--border-color);
+            background: var(--bg-subtle); text-align: center;
+        }
+        .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 32px; }
+        .footer-link { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); }
+        .footer-link:hover { color: var(--accent-primary); }
+
+        /* ========================================================================
+           8. LOADER
+           ======================================================================== */
         #loader {
             position: fixed; inset: 0; background: var(--bg-body); z-index: 9999;
             display: flex; justify-content: center; align-items: center; transition: 0.5s;
         }
+        .spinner {
+            width: 50px; height: 50px;
+            border: 3px solid var(--border-color); border-top-color: var(--accent-primary);
+            border-radius: 50%; animation: spin 1s linear infinite;
+        }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
+        @media (max-width: 900px) {
+            .nav-links { display: none; } /* Hide text links on mobile */
+            .nav-wrapper { width: 90%; justify-content: space-between; }
             .grid-2, .grid-3 { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2.5rem; }
+            .hero h1 { font-size: 3rem; }
+            .container { padding: 0 20px; }
         }
+
+        /* Fade Up Animation */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 
 <body>
-
-    <div class="animated-grid"></div>
-
-    <div id="loader">
-        <svg class="animate-spin" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+    
+    <div class="bg-grid"></div>
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
     </div>
 
-    <nav class="nav-wrapper">
-        <a href="#" style="font-weight: 700; font-size: 1.1rem; color: var(--text-primary); text-decoration: none; padding-left: 12px;">
-            Ajay<span style="color:var(--accent)">.</span>
-        </a>
-        
-        <ul class="nav-links" id="nav-list">
-            <div id="nav-spotlight"></div> <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-            <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
-            <li class="nav-item"><a href="#experience" class="nav-link">Experience</a></li>
-            <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
-            <li class="nav-item"><a href="#resume" class="nav-link">Resume</a></li>
-        </ul>
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="nav-wrapper">
+        <div class="nav-container">
+            <a href="#" style="font-weight: 700; font-size: 1.1rem; padding: 0 16px; margin-right: 8px;">
+                Ajay<span style="color:var(--accent-primary)">.</span>
+            </a>
+            
+            <ul class="nav-links" id="nav-list">
+                <div id="nav-spotlight"></div> <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#resume" class="nav-link">Resume</a></li>
+            </ul>
+        </div>
 
         <button class="theme-toggle" id="theme-btn" aria-label="Toggle Theme">
             <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
             <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
         </button>
-    </nav>
+    </div>
 
-    <header class="container" style="min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-top: 100px;">
-        <div style="margin-bottom: 24px; padding: 6px 16px; border-radius: 50px; border: 1px solid var(--border-color); background: rgba(var(--accent-rgb), 0.1); color: var(--accent); font-weight: 500; font-size: 0.9rem;">
-            Open to Work & Collaborations
+    <header class="container hero">
+        <div class="profile-container">
+            <div class="profile-glow"></div>
+            <img src="./assets/ajay-avatar.png" alt="Ajay Chanumolu" class="profile-img">
         </div>
+
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            <span id="dynamic-text">Open to Work & Collaborations</span>
+        </div>
+
+        <h1>
+            Engineering the Future with <br>
+            <span class="highlight">AI & Automation.</span>
+        </h1>
         
-        <h1>Engineering the Future with<br><span class="highlight">AI & Automation.</span></h1>
-        
-        <p style="max-width: 600px; font-size: 1.25rem; margin-bottom: 40px;">
+        <p>
             I'm <strong>Ajay Chanumolu</strong>, an AI Automation Intern at <strong>BeAble Health</strong>. 
             I build scalable workflows using Python, n8n, and GenAI to solve real-world problems.
         </p>
 
-        <div style="display: flex; gap: 16px;">
+        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
             <a href="#projects" class="gradient-btn">
-                <span class="gradient-btn-inner"></span> <span style="position: relative; z-index: 10; display:flex; align-items:center; gap:8px;">
-                    View Projects <i data-lucide="arrow-right" size="18"></i>
-                </span>
+                <span class="gradient-btn-bg"></span>
+                <span style="position: relative; z-index: 10;">View Projects <i data-lucide="arrow-right" style="display:inline; width:18px; vertical-align:middle;"></i></span>
             </a>
             
             <a href="https://linkedin.com/in/ajaychanumolu" target="_blank" class="gradient-btn">
-                <span class="gradient-btn-inner"></span>
-                <span style="position: relative; z-index: 10; display:flex; align-items:center; gap:8px;">
-                    <i data-lucide="linkedin" size="18"></i> LinkedIn
-                </span>
+                <span class="gradient-btn-bg"></span>
+                <span style="position: relative; z-index: 10;"><i data-lucide="linkedin" style="display:inline; width:18px; vertical-align:middle; margin-right:6px;"></i> LinkedIn</span>
             </a>
         </div>
     </header>
 
-    <section id="about" class="container glow-container">
-        <h2 style="margin-bottom: 40px;">About Me</h2>
-        <div class="glass-card">
-            <div class="card-content">
-                <p style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 24px;">
-                    I am a final-year B.Tech student in <strong>Artificial Intelligence and Machine Learning</strong> at SRKREC. My passion lies in bridging the gap between theoretical AI models and practical automation.
+    <section id="about" class="container reveal">
+        <div class="section-header">
+            <p>01. INTRODUCTION</p>
+            <h2>About Me</h2>
+        </div>
+        <div class="spotlight-group">
+            <div class="glass-card">
+                <div class="card-content">
+                    <p style="font-size: 1.2rem; color: var(--text-primary); margin-bottom: 24px;">
+                        I am a final-year B.Tech student in <strong>Artificial Intelligence and Machine Learning</strong> at SRKREC. My passion lies in bridging the gap between theoretical AI models and practical automation.
+                    </p>
+                    <p style="font-size: 1.1rem;">
+                        From detecting deepfakes with multi-modal neural networks to automating recruitment pipelines using n8n and LLMs, I focus on efficiency and scalability. Currently, I am applying these skills at <strong>BeAble Health</strong>, while also leading technical initiatives as an Executive Member of the ACE Club.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="container reveal">
+        <div class="section-header">
+            <p>02. TECH STACK</p>
+            <h2>Skills & Technologies</h2>
+        </div>
+        <div class="spotlight-group grid grid-2">
+            <div class="glass-card">
+                <div class="card-content">
+                    <h3><i data-lucide="brain-circuit" style="color:var(--accent-primary)"></i> Machine Learning</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">TensorFlow</span>
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">Scikit-learn</span>
+                        <span class="tag">Pandas</span>
+                        <span class="tag">OpenCV</span>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-card">
+                <div class="card-content">
+                    <h3><i data-lucide="workflow" style="color:var(--accent-primary)"></i> Automation & Cloud</h3>
+                    <div class="skill-tags">
+                        <span class="tag">n8n</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">AWS (EC2/S3)</span>
+                        <span class="tag">Azure</span>
+                        <span class="tag">Google Cloud</span>
+                        <span class="tag">Git</span>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-card">
+                <div class="card-content">
+                    <h3><i data-lucide="sparkles" style="color:var(--accent-primary)"></i> Generative AI</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Gemini API</span>
+                        <span class="tag">LangChain</span>
+                        <span class="tag">Pinecone</span>
+                        <span class="tag">Hugging Face</span>
+                        <span class="tag">Gradio</span>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-card">
+                <div class="card-content">
+                    <h3><i data-lucide="code-2" style="color:var(--accent-primary)"></i> CS Fundamentals</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Data Structures</span>
+                        <span class="tag">Algorithms</span>
+                        <span class="tag">OOPs (Java)</span>
+                        <span class="tag">DBMS (SQL)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="container reveal">
+        <div class="section-header">
+            <p>03. CAREER HISTORY</p>
+            <h2>Experience</h2>
+        </div>
+        
+        <div style="max-width: 900px; margin: 0 auto;">
+            <div class="timeline-item">
+                <div class="timeline-role">AI Automation Intern</div>
+                <span class="timeline-company">BeAble Health Pvt Ltd • Nov 2025 - Present</span>
+                <p class="timeline-desc">
+                    Spearheading automation initiatives to streamline operational workflows. Developing intelligent agents and optimizing processes using cutting-edge AI tools like n8n and Python scripts.
                 </p>
-                <p>
-                    From detecting deepfakes with multi-modal neural networks to automating recruitment pipelines using n8n and LLMs, I focus on efficiency and scalability. Currently, I am applying these skills at <strong>BeAble Health</strong>, while also leading technical initiatives as an Executive Member of the ACE Club.
+            </div>
+             <div class="timeline-item">
+                <div class="timeline-role">AI Automation Intern</div>
+                <span class="timeline-company">Truviq Systems • May 2025 - July 2025</span>
+                <p class="timeline-desc">
+                    Engineered end-to-end automation pipelines. Collaborated with cross-functional teams to integrate Large Language Models (LLMs) into existing business logic to enhance product capabilities.
+                </p>
+            </div>
+             <div class="timeline-item">
+                <div class="timeline-role">Cloud Intern</div>
+                <span class="timeline-company">Takshalabs • Feb 2024 - May 2024</span>
+                <p class="timeline-desc">
+                    Gained hands-on experience with AWS and Azure cloud infrastructure. Deployed scalable applications, managed virtual machines, and implemented security best practices.
                 </p>
             </div>
         </div>
     </section>
 
-    <section id="skills" class="container glow-container">
-        <h2 style="margin-bottom: 40px;">Skills & Technologies</h2>
-        <div class="grid grid-2">
+    <section id="projects" class="container reveal">
+        <div class="section-header">
+            <p>04. FEATURED WORK</p>
+            <h2>Projects</h2>
+        </div>
+
+        <div class="spotlight-group grid grid-2">
             <div class="glass-card">
                 <div class="card-content">
-                    <h3 style="margin-bottom: 16px; display:flex; align-items:center; gap:8px;">
-                        <i data-lucide="brain-circuit" style="color:var(--accent)"></i> Machine Learning
-                    </h3>
-                    <div style="display:flex; flex-wrap:wrap; gap:8px;">
-                        <span style="padding:4px 12px; background:var(--bg-body); border:1px solid var(--border-color); border-radius:6px; font-size:0.85rem;">Python</span>
-                        <span style="padding:4px 12px; background:var(--bg-body); border:1px solid var(--border-color); border-radius:6px; font-size:0.85rem;">TensorFlow</span>
-                        <span style="padding:4px 12px; background:var(--bg-body); border:1px solid var(--border-color); border-radius:6px; font-size:0.85rem;">PyTorch</span>
-                        <span style="padding:4px 12px; background:var(--bg-body); border:1px solid var(--border-color); border-radius:6px; font-size:0.85rem;">Scikit-learn</span>
+                    <div class="project-header">
+                        <i data-lucide="video" style="width:40px; height:40px; color:var(--accent-primary)"></i>
+                        <a href="https://github.com/ajaychanumolu/DeepTrace" target="_blank" style="color:var(--text-secondary)"><i data-lucide="github"></i></a>
+                    </div>
+                    <h3 class="project-title">DeepTrace: Deepfake Detection</h3>
+                    <p class="project-desc">
+                        A multi-modal detection system that analyzes Video (ResNeXt+LSTM), Audio (CNN), and Images (DenseNet121). Achieves state-of-the-art accuracy in identifying synthetic media.
+                    </p>
+                    <div class="tech-stack">
+                        <span>Python</span><span>PyTorch</span><span>OpenCV</span>
                     </div>
                 </div>
             </div>
+
             <div class="glass-card">
                 <div class="card-content">
-                    <h3 style="margin-bottom: 16px; display:flex; align-items:center; gap:8px;">
-                        <i data-lucide="workflow" style="color:var(--accent)"></i> Automation
-                    </h3>
-                    <div style="display:flex; flex-wrap:wrap; gap:8px;">
-                        <span style="padding:4px 12px; background:var(--bg-body); border:1px solid var(--border-color); border-radius:6px; font-size:0.85rem;">n8n</span>
-                        <span style="padding:4px 12px; background:var(--bg-body); border:1px solid var(--border-color); border-radius:6px; font-size:0.85rem;">Docker</span>
-                        <span style="padding:4px 12px; background:var(--bg-body); border:1px solid var(--border-color); border-radius:6px; font-size:0.85rem;">AWS</span>
-                        <span style="padding:4px 12px; background:var(--bg-body); border:1px solid var(--border-color); border-radius:6px; font-size:0.85rem;">Azure</span>
+                    <div class="project-header">
+                        <i data-lucide="file-text" style="width:40px; height:40px; color:var(--accent-primary)"></i>
+                        <a href="https://github.com/ajaychanumolu/Chat-with-PDF-using-AI-n8n-Workflow" target="_blank" style="color:var(--text-secondary)"><i data-lucide="github"></i></a>
+                    </div>
+                    <h3 class="project-title">RAG PDF Chatbot</h3>
+                    <p class="project-desc">
+                        An automated workflow to "Chat with your PDF". It ingests documents, generates vector embeddings using the Gemini API, stores them in Pinecone, and retrieves context to answer queries.
+                    </p>
+                    <div class="tech-stack">
+                        <span>n8n</span><span>Gemini API</span><span>Pinecone</span>
                     </div>
                 </div>
             </div>
+
             <div class="glass-card">
                 <div class="card-content">
-                    <h3 style="margin-bottom: 16px; display:flex; align-items:center; gap:8px;">
-                        <i data-lucide="sparkles" style="color:var(--accent)"></i> Generative AI
-                    </h3>
-                    <div style="display:flex; flex-wrap:wrap; gap:8px;">
-                        <span style="padding:4px 12px; background:var(--bg-body); border:1px solid var(--border-color); border-radius:6px; font-size:0.85rem;">Gemini API</span>
-                        <span style="padding:4px 12px; background:var(--bg-body); border:1px solid var(--border-color); border-radius:6px; font-size:0.85rem;">LangChain</span>
-                        <span style="padding:4px 12px; background:var(--bg-body); border:1px solid var(--border-color); border-radius:6px; font-size:0.85rem;">Pinecone</span>
+                    <div class="project-header">
+                        <i data-lucide="activity" style="width:40px; height:40px; color:var(--accent-primary)"></i>
+                        <a href="https://github.com/ajaychanumolu/Sclerosis_Disease_Prediction" target="_blank" style="color:var(--text-secondary)"><i data-lucide="github"></i></a>
+                    </div>
+                    <h3 class="project-title">Disease Prediction</h3>
+                    <p class="project-desc">
+                        Developed a Random Forest Classifier enhanced with Recursive Feature Elimination (RFE) to predict sclerosis progression. The model achieved 87.2% accuracy and is deployed via Gradio.
+                    </p>
+                    <div class="tech-stack">
+                        <span>Scikit-learn</span><span>Gradio</span><span>Pandas</span>
                     </div>
                 </div>
             </div>
-             <div class="glass-card">
+
+            <div class="glass-card">
                 <div class="card-content">
-                    <h3 style="margin-bottom: 16px; display:flex; align-items:center; gap:8px;">
-                        <i data-lucide="code-2" style="color:var(--accent)"></i> Fundamentals
-                    </h3>
-                    <div style="display:flex; flex-wrap:wrap; gap:8px;">
-                        <span style="padding:4px 12px; background:var(--bg-body); border:1px solid var(--border-color); border-radius:6px; font-size:0.85rem;">DSA</span>
-                        <span style="padding:4px 12px; background:var(--bg-body); border:1px solid var(--border-color); border-radius:6px; font-size:0.85rem;">OOPs</span>
-                        <span style="padding:4px 12px; background:var(--bg-body); border:1px solid var(--border-color); border-radius:6px; font-size:0.85rem;">Java</span>
-                        <span style="padding:4px 12px; background:var(--bg-body); border:1px solid var(--border-color); border-radius:6px; font-size:0.85rem;">SQL</span>
+                    <div class="project-header">
+                        <i data-lucide="mic" style="width:40px; height:40px; color:var(--accent-primary)"></i>
+                        <a href="#" target="_blank" style="color:var(--text-secondary)"><i data-lucide="github"></i></a>
+                    </div>
+                    <h3 class="project-title">Speech Emotion Recognition</h3>
+                    <p class="project-desc">
+                        Final year project focused on audio processing. Utilizes a hybrid architecture of BiLSTM, CNNs, and Self-Attention mechanisms to classify human emotions from raw audio signals.
+                    </p>
+                    <div class="tech-stack">
+                        <span>Deep Learning</span><span>Audio</span><span>BiLSTM</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="container glow-container">
-        <h2 style="margin-bottom: 40px;">Featured Projects</h2>
-        <div class="grid grid-2">
-            <div class="glass-card">
-                <div class="card-content">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:16px;">
-                        <i data-lucide="video" style="color:var(--accent); width:32px; height:32px;"></i>
-                        <a href="https://github.com/ajaychanumolu/DeepTrace" target="_blank" style="color:var(--text-secondary);"><i data-lucide="github"></i></a>
-                    </div>
-                    <h3 style="margin-bottom:8px;">DeepTrace</h3>
-                    <p style="font-size:0.9rem; margin-bottom:24px;">Multi-modal deepfake detection (Video, Audio, Image) using ResNeXt+LSTM and DenseNet121.</p>
-                    <div style="font-family:'JetBrains Mono'; font-size:0.8rem; color:var(--text-secondary);">Python • PyTorch • OpenCV</div>
-                </div>
-            </div>
-            <div class="glass-card">
-                <div class="card-content">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:16px;">
-                        <i data-lucide="file-text" style="color:var(--accent); width:32px; height:32px;"></i>
-                        <a href="https://github.com/ajaychanumolu/Chat-with-PDF-using-AI-n8n-Workflow" target="_blank" style="color:var(--text-secondary);"><i data-lucide="github"></i></a>
-                    </div>
-                    <h3 style="margin-bottom:8px;">RAG PDF Chatbot</h3>
-                    <p style="font-size:0.9rem; margin-bottom:24px;">Automated n8n workflow to ingest PDFs, embed with Gemini, and query via Pinecone Vector DB.</p>
-                    <div style="font-family:'JetBrains Mono'; font-size:0.8rem; color:var(--text-secondary);">n8n • Gemini • Pinecone</div>
-                </div>
-            </div>
-            <div class="glass-card">
-                <div class="card-content">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:16px;">
-                        <i data-lucide="activity" style="color:var(--accent); width:32px; height:32px;"></i>
-                        <a href="https://github.com/ajaychanumolu/Sclerosis_Disease_Prediction" target="_blank" style="color:var(--text-secondary);"><i data-lucide="github"></i></a>
-                    </div>
-                    <h3 style="margin-bottom:8px;">Disease Prediction</h3>
-                    <p style="font-size:0.9rem; margin-bottom:24px;">Random Forest Classifier with RFE to predict sclerosis progression. 87.2% accuracy.</p>
-                    <div style="font-family:'JetBrains Mono'; font-size:0.8rem; color:var(--text-secondary);">Scikit-learn • Gradio</div>
-                </div>
-            </div>
-            <div class="glass-card">
-                <div class="card-content">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:16px;">
-                        <i data-lucide="mic" style="color:var(--accent); width:32px; height:32px;"></i>
-                        <a href="#" target="_blank" style="color:var(--text-secondary);"><i data-lucide="github"></i></a>
-                    </div>
-                    <h3 style="margin-bottom:8px;">Speech Emotion</h3>
-                    <p style="font-size:0.9rem; margin-bottom:24px;">Classifying human emotions from audio using BiLSTM, CNNs, and Self-Attention.</p>
-                    <div style="font-family:'JetBrains Mono'; font-size:0.8rem; color:var(--text-secondary);">Deep Learning • Audio</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="resume" class="container" style="text-align: center;">
-        <div style="padding: 60px; background: linear-gradient(180deg, var(--bg-card), transparent); border: 1px solid var(--border-color); border-radius: 24px;">
-            <h2 style="margin-bottom: 16px;">See the Full Picture</h2>
-            <p style="margin-bottom: 40px; color: var(--text-secondary);">Download my resume for a detailed career history.</p>
-            <div style="display: flex; justify-content: center; gap: 20px;">
+    <section id="resume" class="container reveal">
+        <div class="glass-card resume-banner">
+            <h2 style="margin-bottom: 16px;">Ready to see the full details?</h2>
+            <p style="margin-bottom: 32px; color: var(--text-secondary);">
+                Download my resume for a comprehensive overview of my education, experience, and project history.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
                 <a href="https://drive.google.com/file/d/1XM5zOodsVNGJmP6kr6YthlLjEeEQ4_fn/view?usp=sharing" target="_blank" class="gradient-btn">
-                    <span class="gradient-btn-inner"></span>
+                    <span class="gradient-btn-bg"></span>
                     <span style="position: relative; z-index: 10;">View Resume</span>
+                </a>
+                <a href="https://drive.google.com/file/d/1XM5zOodsVNGJmP6kr6YthlLjEeEQ4_fn/export?format=pdf" class="gradient-btn">
+                    <span class="gradient-btn-bg"></span>
+                    <span style="position: relative; z-index: 10;">Download PDF</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <footer style="padding: 60px 0; border-top: 1px solid var(--border-color); text-align: center; color: var(--text-secondary);">
-        <p>&copy; 2026 Ajay Chanumolu. Built with the future in mind.</p>
-        <div style="margin-top: 20px; display: flex; justify-content: center; gap: 20px;">
-            <a href="mailto:chanumoluajay@gmail.com">Email</a>
-            <a href="https://linkedin.com/in/ajaychanumolu">LinkedIn</a>
-            <a href="https://github.com/ajaychanumolu">GitHub</a>
+    <footer class="footer">
+        <div class="container">
+            <h2 style="font-size: 2rem; margin-bottom: 40px;">Let's Connect</h2>
+            <div class="footer-links">
+                <a href="mailto:chanumoluajay@gmail.com" class="footer-link">
+                    <i data-lucide="mail"></i> chanumoluajay@gmail.com
+                </a>
+                <a href="tel:+918074177736" class="footer-link">
+                    <i data-lucide="phone"></i> +91 8074177736
+                </a>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">
+                &copy; 2026 Ajay Chanumolu. Built with Code.
+            </p>
         </div>
     </footer>
 
@@ -499,11 +785,13 @@
         // 1. Initialize Icons
         lucide.createIcons();
 
-        // 2. Loader Logic
+        // 2. Loader
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
-            loader.style.opacity = '0';
-            setTimeout(() => loader.style.display = 'none', 500);
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => { loader.style.display = 'none'; }, 500);
+            }, 500);
         });
 
         // 3. Theme Toggle
@@ -512,7 +800,7 @@
         const moon = document.getElementById('moon');
         const html = document.documentElement;
 
-        function updateTheme(isDark) {
+        function applyTheme(isDark) {
             if(isDark) {
                 html.classList.add('dark');
                 sun.style.display = 'block'; moon.style.display = 'none';
@@ -524,18 +812,38 @@
             }
         }
 
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        updateTheme(savedTheme === 'dark');
+        const savedTheme = localStorage.getItem('theme') || 'dark'; // Default Dark
+        applyTheme(savedTheme === 'dark');
 
         themeBtn.addEventListener('click', () => {
-            updateTheme(!html.classList.contains('dark'));
+            applyTheme(!html.classList.contains('dark'));
         });
 
-        // 4. Glowing Cards Effect
-        // We track mouse position relative to the Glow Container
-        document.querySelectorAll('.glow-container').forEach(container => {
-            container.addEventListener('mousemove', (e) => {
-                const cards = container.querySelectorAll('.glass-card');
+        // 4. Dynamic Text Rotator (The "Changing Tag" Feature)
+        const tags = [
+            "Open to Work & Collaborations",
+            "Building Automation Pipelines",
+            "Machine Learning Enthusiast",
+            "Creating Intelligent Agents"
+        ];
+        let tagIndex = 0;
+        const textElement = document.getElementById('dynamic-text');
+
+        setInterval(() => {
+            textElement.classList.add('fade-out'); // Start fade out
+            
+            setTimeout(() => {
+                tagIndex = (tagIndex + 1) % tags.length;
+                textElement.innerText = tags[tagIndex]; // Change text
+                textElement.classList.remove('fade-out'); // Fade back in
+            }, 500); // Wait for fade out to finish
+            
+        }, 3000); // Change every 3 seconds
+
+        // 5. Spotlight Effect (Mouse Tracking)
+        document.querySelectorAll('.spotlight-group').forEach(group => {
+            group.addEventListener('mousemove', (e) => {
+                const cards = group.querySelectorAll('.glass-card');
                 for (const card of cards) {
                     const rect = card.getBoundingClientRect();
                     const x = e.clientX - rect.left;
@@ -546,7 +854,7 @@
             });
         });
 
-        // 5. Limelight Nav Effect
+        // 6. Limelight Nav (Sliding Highlight)
         const navList = document.getElementById('nav-list');
         const spotlight = document.getElementById('nav-spotlight');
         const links = document.querySelectorAll('.nav-link');
@@ -557,7 +865,8 @@
             
             spotlight.style.width = `${rect.width}px`;
             spotlight.style.height = `${rect.height}px`;
-            spotlight.style.transform = `translateX(${rect.left - parentRect.left}px)`;
+            spotlight.style.top = `${rect.top - parentRect.top}px`;
+            spotlight.style.left = `${rect.left - parentRect.left}px`;
             spotlight.style.opacity = '1';
         }
 
@@ -568,6 +877,17 @@
         navList.addEventListener('mouseleave', () => {
             spotlight.style.opacity = '0';
         });
+
+        // 7. Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
     </script>
 </body>
