@@ -1,996 +1,1020 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Portfolio of Ajay Chanumolu - AI/ML Engineer & Automation Developer">
+    <meta name="theme-color" content="#09090b">
+    
+    <title>Ajay Chanumolu | AI & Machine Learning Engineer</title>
+    <link rel="icon" href="./assets/favicon.png" type="image/png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <title>Ajay Chanumolu</title>
-    <link rel="icon" href="./assets/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-        /* CSS Variables for Theme */
+        /* ========================================
+        THEME VARIABLES (The "21st.dev" Look)
+        ========================================
+        */
         :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --text-primary: #0f172a;
-            --text-secondary: #64748b;
-            --accent-color: #6366f1;
-            --accent-hover: #4f46e5;
-            --border-color: #e2e8f0;
-            --card-bg: rgba(255, 255, 255, 0.8);
-            --button-bg: rgba(99, 102, 241, 0.1);
-            --button-hover: rgba(99, 102, 241, 0.2);
-            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --glass-bg: rgba(255, 255, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.18);
+            /* Light Mode Default */
+            --bg-body: #ffffff;
+            --bg-subtle: #f4f4f5; /* Zinc 100 */
+            --bg-card: #ffffff;
+            --bg-card-hover: #fafafa;
+            
+            --border-color: #e4e4e7; /* Zinc 200 */
+            --border-hover: #d4d4d8; /* Zinc 300 */
+            
+            --text-primary: #18181b; /* Zinc 900 */
+            --text-secondary: #71717a; /* Zinc 500 */
+            --text-muted: #a1a1aa; /* Zinc 400 */
+            
+            --accent-primary: #4f46e5; /* Indigo 600 */
+            --accent-glow: rgba(79, 70, 229, 0.15);
+            
+            --font-ui: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 24px;
+
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-glow: 0 0 20px rgba(79, 70, 229, 0.15);
         }
 
-        [data-theme="dark"] {
-            --bg-primary: #0f0f23;
-            --bg-secondary: #1a1a2e;
-            --text-primary: #ffffff;
-            --text-secondary: #94a3b8;
-            --accent-color: #818cf8;
-            --accent-hover: #6366f1;
-            --border-color: #374151;
-            --card-bg: rgba(26, 26, 46, 0.8);
-            --button-bg: rgba(129, 140, 248, 0.1);
-            --button-hover: rgba(129, 140, 248, 0.2);
-            --glass-bg: rgba(26, 26, 46, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.1);
+        .dark {
+            /* Dark Mode (The "Deep Zinc" Look) */
+            --bg-body: #09090b; /* Zinc 950 */
+            --bg-subtle: #18181b; /* Zinc 900 */
+            --bg-card: #0c0c0e; /* Custom deep dark */
+            --bg-card-hover: #18181b;
+            
+            --border-color: #27272a; /* Zinc 800 */
+            --border-hover: #3f3f46; /* Zinc 700 */
+            
+            --text-primary: #fafafa; /* Zinc 50 */
+            --text-secondary: #a1a1aa; /* Zinc 400 */
+            --text-muted: #52525b; /* Zinc 600 */
+            
+            --accent-primary: #818cf8; /* Indigo 400 */
+            --accent-glow: rgba(129, 140, 248, 0.1);
         }
 
-        /* Global Styles */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body, html {
-            height: 100%;
-            font-family: 'Inter', sans-serif;
-            background: var(--bg-primary);
+        /* ========================================
+        GLOBAL RESET & BASE STYLES
+        ========================================
+        */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: var(--font-ui);
+            background-color: var(--bg-body);
             color: var(--text-primary);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
             overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Animated Background */
-        .bg-animation {
+        /* Background Grid Pattern */
+        .bg-grid {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.1;
+            background-image: linear-gradient(to right, var(--border-color) 1px, transparent 1px),
+                              linear-gradient(to bottom, var(--border-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+            opacity: 0.15;
+            pointer-events: none;
         }
 
-        .floating-shapes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+        /* ========================================
+        LOADER ANIMATION
+        ========================================
+        */
+        .loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-body);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
+        }
+        
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
         }
 
-        .shape {
-            position: absolute;
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--accent-primary);
             border-radius: 50%;
-            filter: blur(40px);
-            animation: float 20s infinite linear;
+            animation: spin 0.8s linear infinite;
         }
 
-        .shape:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            background: var(--gradient-1);
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ========================================
+        UTILITY CLASSES & TYPOGRAPHY
+        ========================================
+        */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
 
-        .shape:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            background: var(--gradient-2);
-            top: 60%;
-            right: 10%;
-            animation-delay: -7s;
+        .highlight {
+            color: var(--accent-primary);
+            font-weight: 600;
         }
 
-        .shape:nth-child(3) {
-            width: 250px;
-            height: 250px;
-            background: var(--gradient-3);
-            bottom: 20%;
-            left: 30%;
-            animation-delay: -14s;
+        h1, h2, h3, h4 {
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(30px, -30px) rotate(120deg); }
-            66% { transform: translate(-20px, 20px) rotate(240deg); }
-        }
+        h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1; font-weight: 800; }
+        h2 { font-size: 2.25rem; font-weight: 700; margin-bottom: 1rem; }
+        h3 { font-size: 1.25rem; font-weight: 600; }
+        
+        p { color: var(--text-secondary); margin-bottom: 1.5rem; }
 
-        /* Navigation */
+        a { text-decoration: none; color: inherit; transition: all 0.2s ease; }
+
+        /* ========================================
+        NAVIGATION
+        ========================================
+        */
         .nav {
             position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
+            top: 0;
+            width: 100%;
+            background: rgba(var(--bg-body), 0.7); /* Translucency */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
             z-index: 1000;
-            padding: 12px 20px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-
-        .nav-container {
+            height: 70px;
             display: flex;
             align-items: center;
-            gap: 2rem;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
         }
 
         .logo {
             font-weight: 700;
-            font-size: 1.2rem;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo-dot {
+            width: 8px; height: 8px; background: var(--accent-primary); border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-primary);
         }
 
         .nav-links {
             display: flex;
-            gap: 1.5rem;
+            gap: 32px;
             list-style: none;
         }
 
         .nav-links a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 500;
             font-size: 0.9rem;
-            padding: 8px 16px;
-            border-radius: 25px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+            color: var(--text-secondary);
             position: relative;
         }
 
-        .nav-links a:hover {
-            background: var(--button-bg);
-            color: var(--accent-color);
-            transform: translateY(-2px);
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-primary);
         }
 
-        .theme-toggle {
-            background: var(--button-bg);
-            border: none;
-            border-radius: 25px;
-            padding: 10px 15px;
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+
+        .theme-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
             color: var(--text-primary);
+            padding: 8px;
+            border-radius: 50%;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 1.1rem;
             display: flex;
             align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .theme-btn:hover {
+            border-color: var(--accent-primary);
+            background: var(--bg-subtle);
+            transform: rotate(15deg);
+        }
+
+        /* ========================================
+        HERO SECTION
+        ========================================
+        */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease forwards 0.5s;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
             gap: 8px;
-        }
-
-        .theme-toggle:hover {
-            background: var(--button-hover);
-            transform: scale(1.05);
-        }
-
-        /* Main Container */
-        .portfolio-container {
-            padding: 120px 5% 80px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        /* Header Section */
-        .header-section {
-            text-align: center;
-            margin-bottom: 120px;
-            position: relative;
-        }
-
-        .profile-image {
-            margin-left: 500px;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
+            padding: 6px 12px;
+            background: var(--accent-glow);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: 100px;
+            color: var(--accent-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
             margin-bottom: 32px;
-            border: 4px solid transparent;
-            background: var(--gradient-1);
-            padding: 4px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            position: relative;
-            overflow: hidden;
         }
 
-        .profile-image img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
+        .status-dot {
+            width: 6px; height: 6px; background: currentColor; border-radius: 50%;
+            animation: pulse 2s infinite;
         }
 
-        .profile-image:hover {
-            transform: scale(1.05) rotate(5deg);
-            box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.3);
-        }
-
-        .profile-image::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg, transparent, var(--accent-color), transparent);
-            animation: rotate 3s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .subtitle {
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-            opacity: 0;
-            animation: slideUp 0.8s ease-out 0.2s forwards;
-        }
-
-        .main-title {
-            font-size: clamp(3rem, 8vw, 5rem);
-            line-height: 1.1;
-            font-weight: 800;
-            margin-bottom: 32px;
-            opacity: 0;
-            animation: slideUp 0.8s ease-out 0.4s forwards;
-        }
-
-        .highlight {
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: relative;
-        }
-
-        .description {
+        .hero-desc {
             font-size: 1.25rem;
-            line-height: 1.6;
-            color: var(--text-secondary);
             max-width: 600px;
-            margin: 0 auto 48px;
-            opacity: 0;
-            animation: slideUp 0.8s ease-out 0.6s forwards;
+            line-height: 1.7;
+            margin-top: 24px;
         }
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            margin-top: 40px;
         }
 
-        /* Glass Cards */
+        .btn {
+            padding: 12px 24px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--text-primary); /* Inverted for contrast */
+            color: var(--bg-body);
+            border: 1px solid var(--text-primary);
+        }
+        
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--text-primary);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-primary);
+            background: var(--bg-subtle);
+        }
+
+        /* ========================================
+        SECTIONS COMMON
+        ========================================
+        */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title-wrapper {
+            margin-bottom: 60px;
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            color: var(--accent-primary);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* ========================================
+        BENTO GRID & CARDS
+        ========================================
+        */
+        .bento-grid {
+            display: grid;
+            gap: 24px;
+        }
+        
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+
         .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 2rem;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 32px;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             overflow: hidden;
-        }
-
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .glass-card:hover::before {
-            left: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .glass-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
-            border-color: var(--accent-color);
-        }
-        .resume-button {
-    background-color: #6c63ff;
-    color: white;
-    padding: 12px 20px;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-    display: inline-block;
-}
-
-.resume-button:hover {
-    background-color: #574fd6;
-}
-
-        /* Social Media Section */
-        .social-section {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 120px;
-            flex-wrap: wrap;
+            transform: translateY(-5px);
+            border-color: var(--text-secondary);
+            box-shadow: var(--shadow-glow);
         }
 
-        .social-button {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            padding: 12px 24px;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* ========================================
+        SKILLS SECTION
+        ========================================
+        */
+        .skill-category {
+            margin-bottom: 12px;
+        }
+        
+        .skill-category h4 {
+            font-size: 1rem;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
             gap: 8px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .social-button:hover {
-            background: var(--accent-color);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4);
-        }
-
-        /* Section Styling */
-        .section {
-            margin-bottom: 120px;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 48px;
-            text-align: center;
-        }
-
-        .section-title .highlight {
-            position: relative;
-        }
-
-        /* Grid Layouts */
-        .grid {
-            display: grid;
-            gap: 2rem;
-        }
-
-        .grid-2 {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
-
-        .grid-3 {
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        }
-
-        /* About Section */
-        .about-content {
-            text-align: center;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--text-secondary);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Skills Section */
-        .skill-category h3 {
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
+            color: var(--text-primary);
         }
 
         .skill-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 8px;
         }
 
-        .skill-tag {
-            background: var(--button-bg);
-            color: var(--text-primary);
-            padding: 8px 16px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 500;
+        .tag {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            padding: 6px 12px;
+            border-radius: 6px;
+            background: var(--bg-subtle);
+            color: var(--text-secondary);
             border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
+            transition: all 0.2s;
         }
 
-        .skill-tag:hover {
-            background: var(--accent-color);
-            color: white;
-            transform: translateY(-2px);
+        .tag:hover {
+            color: var(--accent-primary);
+            border-color: var(--accent-primary);
+            background: var(--accent-glow);
         }
 
-        /* Work Items */
-        .work-item {
+        /* ========================================
+        EXPERIENCE TIMELINE
+        ========================================
+        */
+        .timeline-item {
             position: relative;
-            border-left: 4px solid var(--accent-color);
-            padding-left: 1rem;
+            padding-left: 30px;
+            border-left: 2px solid var(--border-color);
+            margin-bottom: 40px;
         }
 
-        .work-title {
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: var(--bg-body);
+            border: 2px solid var(--accent-primary);
+            border-radius: 50%;
+        }
+
+        .timeline-date {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            margin-bottom: 4px;
+        }
+
+        .timeline-role {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .timeline-company {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        /* ========================================
+        PROJECTS
+        ========================================
+        */
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .folder-icon {
+            color: var(--accent-primary);
+            width: 40px;
+            height: 40px;
+        }
+
+        .project-links a {
+            color: var(--text-secondary);
+            padding: 8px;
+        }
+        .project-links a:hover { color: var(--text-primary); }
+
+        .project-title { margin-bottom: 12px; }
+        
+        .project-desc {
+            font-size: 0.95rem;
+            flex-grow: 1; /* Push footer down */
+        }
+
+        .project-tech-list {
+            margin-top: 24px;
+            display: flex;
+            gap: 12px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ========================================
+        ACHIEVEMENTS
+        ========================================
+        */
+        .achievement-icon {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        /* ========================================
+        RESUME SECTION
+        ========================================
+        */
+        .resume-banner {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-subtle));
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resume-banner::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .resume-banner:hover::after { transform: translateX(100%); }
+
+        /* ========================================
+        CONTACT & FOOTER
+        ========================================
+        */
+        .footer {
+            padding: 80px 0 40px;
+            border-top: 1px solid var(--border-color);
+            background: var(--bg-subtle);
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .contact-link {
             font-size: 1.5rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .work-title a {
-            color: var(--text-primary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .work-title a:hover {
-            color: var(--accent-color);
-        }
-
-        .work-description {
-            font-size: 1.1rem;
             color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .work-extra {
-            font-size: 0.9rem;
-            color: var(--accent-color);
-            font-weight: 500;
-        }
-
-        /* Achievement Cards */
-        .achievement-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .achievement-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-
-        .achievement-description {
-            color: var(--text-secondary);
-        }
-
-        /* Contact Section */
-        .contact-info {
-            text-align: center;
-            margin-bottom: 48px;
-            font-size: 1.1rem;
-        }
-
-        .contact-info a {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .contact-info a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .nav-container {
-                gap: 1rem;
-            }
-
-            .portfolio-container {
-                padding: 100px 5% 60px;
-            }
-
-            .grid-2,
-            .grid-3 {
-                grid-template-columns: 1fr;
-            }
-
-            .social-section {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Loading animation */
-        .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-primary);
             display: flex;
-            justify-content: center;
             align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease-out;
+            gap: 12px;
         }
 
-        .loader-content {
+        .contact-link:hover { color: var(--accent-primary); }
+
+        .copyright {
             text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
         }
 
-        .loader-spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid var(--border-color);
-            border-top: 3px solid var(--accent-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+        /* ========================================
+        ANIMATIONS & RESPONSIVE
+        ========================================
+        */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, visibility;
+        }
+        
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(79, 70, 229, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Simple hide for now */
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+            .timeline-item { padding-left: 20px; }
+            .cta-group { flex-direction: column; width: 100%; }
+            .btn { width: 100%; justify-content: center; }
         }
     </style>
 </head>
 
 <body>
-    <!-- Loading Screen -->
+    <div class="bg-grid"></div>
+
     <div class="loader" id="loader">
-        <div class="loader-content">
-            <div class="loader-spinner"></div>
-            <p>Loading...</p>
-        </div>
+        <div class="spinner"></div>
     </div>
 
-    <!-- Animated Background -->
-    <div class="bg-animation">
-        <div class="floating-shapes">
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-        </div>
-    </div>
-
-    <!-- Navigation -->
     <nav class="nav">
-        <div class="nav-container">
-            <div class="logo"></div>
-           <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#work">Projects</a></li>
-    <li><a href="#achievements">Achievements</a></li>
-    <li><a href="#resume">Resume</a></li>
-    <li><a href="#contact">Contact</a></li>
-</ul>
-            <button class="theme-toggle" onclick="toggleTheme()">
-                <span id="theme-icon">🌙</span>
+        <div class="container nav-inner">
+            <a href="#" class="logo">
+                <div class="logo-dot"></div>
+                Ajay Chanumolu
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Work</a></li>
+                <li><a href="#resume">Resume</a></li>
+            </ul>
+            <button class="theme-btn" id="theme-toggle" aria-label="Toggle Theme">
+                <i data-lucide="sun"></i>
             </button>
         </div>
     </nav>
 
-    <div class="portfolio-container">
-        <!-- Header Section -->
-        <header class="header-section">
-            <div class="profile-image">
-                <img src="./assets/ajay-avatar.png" alt="Ajay Chanumolu">
+    <header class="container hero">
+        <div class="hero-content">
+            <div class="status-badge">
+                <div class="status-dot"></div>
+                Available for Automation Projects
             </div>
-            <h3 class="subtitle">Hey, I'm Ajay Chanumolu</h3>
-            <h1 class="main-title">ML & MLOps Enthusiast  <span class="highlight">Building AI-driven Automations</span></h1>
-            <p class="description">
-            Intern @ Truviq Systems · n8n Automator · Java & Python Developer · Executive Body @ ACE · SRKREC '26
+            
+            <h1>
+                Building Intelligent<br>
+                <span class="highlight">Systems & Automations.</span>
+            </h1>
+            
+            <p class="hero-desc">
+                I am an AI Automation Developer and ML Enthusiast specializing in creating self-sustaining workflows. 
+                Currently innovating at <strong>BeAble Health</strong> with GenAI, Python, and n8n.
             </p>
 
-            <div class="contact-info">
-                <p>Let's connect → <a href="mailto:chanumoluajay@gmail.com">chanumoluajay@gmail.com</a></p>
+            <div class="cta-group">
+                <a href="#projects" class="btn btn-primary">
+                    View My Work <i data-lucide="arrow-right" size="18"></i>
+                </a>
+                <a href="https://linkedin.com/in/ajaychanumolu" target="_blank" class="btn btn-secondary">
+                    <i data-lucide="linkedin" size="18"></i> LinkedIn
+                </a>
+                <a href="https://github.com/ajaychanumolu" target="_blank" class="btn btn-secondary">
+                    <i data-lucide="github" size="18"></i> GitHub
+                </a>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <!-- Social Media Section -->
-        <section class="social-section">
-           
-            <a href="https://github.com/ajaychanumolu" class="social-button" target="_blank">
-                <span>💻</span> GitHub
-            </a>
-            <a href="https://linkedin.com/in/ajaychanumolu" class="social-button" target="_blank">
-                <span>💼</span> LinkedIn
-            </a>
-            <a href="mailto:chanumoluajay@gmail.com" class="social-button">
-                <span>📧</span> Email
-            </a>
-        </section>
+    <section id="about" class="container fade-in-section">
+        <div class="section-title-wrapper">
+            <span class="section-label">01. ABOUT ME</span>
+            <h2>Who I Am</h2>
+        </div>
+        <div class="glass-card">
+            <p style="font-size: 1.1rem; color: var(--text-primary);">
+                I am a final-year B.Tech student in Artificial Intelligence & Machine Learning at SRKREC. 
+                My passion lies at the intersection of **Deep Learning** and **Operational Efficiency**. 
+            </p>
+            <p>
+                I don't just build models; I build pipelines that work. From detecting deepfakes with multi-modal neural networks 
+                to automating HR recruitment processes using n8n and LLMs, I focus on solving real problems. 
+                Currently, I serve as an **Executive Body Member of the ACE Club**, leading technical initiatives and 
+                mentoring peers in the latest tech stacks.
+            </p>
+        </div>
+    </section>
 
-        <!-- About Section -->
-        <section id="about" class="section fade-in">
-            <h2 class="section-title">About <span class="highlight">Me</span></h2>
-            <div class="glass-card">
-                <div class="about-content">
-                    <p>I'm a dedicated Artificial Intelligence and Machine Learning student with a strong foundation in software development and a growing passion for ML, MLOps, and automation. I enjoy building intelligent systems that solve real-world problems—ranging from deepfake detection to recruitment automation. Currently interning at Truviq Systems, I actively work on end-to-end workflows using tools like n8n, Gemini, and Pinecone, while continuing to contribute to open-source and lead initiatives as part of the ACE Club at SRKREC. I'm always exploring new technologies to enhance my skill set and make meaningful contributions to the tech community.
+    <section id="skills" class="container fade-in-section">
+        <div class="section-title-wrapper">
+            <span class="section-label">02. TECHNICAL ARSENAL</span>
+            <h2>Skills & Technologies</h2>
+        </div>
 
-</p>
+        <div class="bento-grid grid-2">
+            <div class="glass-card skill-category">
+                <h4><i data-lucide="brain-circuit" size="20"></i> Machine Learning</h4>
+                <div class="skill-tags">
+                    <span class="tag">TensorFlow</span>
+                    <span class="tag">PyTorch</span>
+                    <span class="tag">Scikit-learn</span>
+                    <span class="tag">OpenCV</span>
+                    <span class="tag">Pandas</span>
                 </div>
             </div>
-        </section>
 
-        <!-- Skills Section -->
-<section id="skills" class="section fade-in">
-  <h2 class="section-title">Skills & <span class="highlight">Technologies</span></h2>
-  <div class="grid grid-3">
+            <div class="glass-card skill-category">
+                <h4><i data-lucide="workflow" size="20"></i> Automation & Cloud</h4>
+                <div class="skill-tags">
+                    <span class="tag">n8n</span>
+                    <span class="tag">Docker</span>
+                    <span class="tag">AWS (EC2, S3)</span>
+                    <span class="tag">Azure</span>
+                    <span class="tag">Google Cloud</span>
+                </div>
+            </div>
 
-    <!-- Machine Learning -->
-    <div class="glass-card skill-category">
-      <h3>Machine Learning</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">Scikit-learn</span>
-        <span class="skill-tag">Pandas</span>
-        <span class="skill-tag">Matplotlib</span>
-        <span class="skill-tag">Gradio</span>
-        <span class="skill-tag">Streamlit</span>
-      </div>
-    </div>
+            <div class="glass-card skill-category">
+                <h4><i data-lucide="sparkles" size="20"></i> GenAI & LLMs</h4>
+                <div class="skill-tags">
+                    <span class="tag">Gemini API</span>
+                    <span class="tag">LangChain</span>
+                    <span class="tag">Pinecone (Vector DB)</span>
+                    <span class="tag">HuggingFace</span>
+                </div>
+            </div>
 
-    <!-- Deep Learning -->
-    <div class="glass-card skill-category">
-      <h3>Deep Learning</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">TensorFlow</span>
-        <span class="skill-tag">Keras</span>
-        <span class="skill-tag">PyTorch</span>
-        <span class="skill-tag">CNN</span>
-        <span class="skill-tag">LSTM</span>
-      </div>
-    </div>
+            <div class="glass-card skill-category">
+                <h4><i data-lucide="code-2" size="20"></i> Languages</h4>
+                <div class="skill-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Java</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">HTML/CSS</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Tools & DevOps -->
-    <div class="glass-card skill-category">
-      <h3>Tools</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">n8n</span>
-        <span class="skill-tag">Google Cloud</span>
-        <span class="skill-tag">Azure VM</span>
-        <span class="skill-tag">Pinecone</span>
-        <span class="skill-tag">Gemini API</span>
-      </div>
-    </div>
+    <section id="experience" class="container fade-in-section">
+        <div class="section-title-wrapper">
+            <span class="section-label">03. EXPERIENCE</span>
+            <h2>Where I've Worked</h2>
+        </div>
 
-   
+        <div style="max-width: 800px;">
+            <div class="timeline-item">
+                <div class="timeline-date">Nov 2025 – Present</div>
+                <h3 class="timeline-role">AI Automation Intern</h3>
+                <div class="timeline-company">BeAble Health Pvt Ltd</div>
+                <p>
+                    Developing automated content generation pipelines and intelligent agents to streamline business operations. 
+                    Utilizing n8n workflows integrated with Generative AI models to reduce manual workload.
+                </p>
+            </div>
 
-    <!-- CS Fundamentals -->
-    <div class="glass-card skill-category">
-      <h3>CS Fundamentals</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">Data Structures</span>
-        <span class="skill-tag">Algorithms</span>
-        <span class="skill-tag">OOPs</span>
-        <span class="skill-tag">Operating System</span>
-      </div>
-    </div>
+            <div class="timeline-item">
+                <div class="timeline-date">May 2025 – July 2025</div>
+                <h3 class="timeline-role">AI Automation Intern</h3>
+                <div class="timeline-company">Truviq Systems</div>
+                <p>
+                    Engineered end-to-end automation solutions using Python and low-code tools. 
+                    Collaborated with cross-functional teams to integrate LLMs into existing product architectures.
+                </p>
+            </div>
 
-  </div>
-</section>
+            <div class="timeline-item">
+                <div class="timeline-date">Feb 2024 – May 2024</div>
+                <h3 class="timeline-role">Cloud Intern</h3>
+                <div class="timeline-company">Takshalabs</div>
+                <p>
+                    Deployed scalable web applications on AWS and Azure. Managed virtual machines and gained deep insights into cloud infrastructure security.
+                </p>
+            </div>
+        </div>
+    </section>
 
-       <!-- Work Section -->
-<section id="work" class="section fade-in">
-  <h2 class="section-title">Featured <span class="highlight">Projects</span></h2>
-  <div class="grid grid-2">
+    <section id="projects" class="container fade-in-section">
+        <div class="section-title-wrapper">
+            <span class="section-label">04. FEATURED PROJECTS</span>
+            <h2>What I've Built</h2>
+        </div>
 
-    <!-- DeepTrace Project -->
-    <div class="glass-card work-item">
-      <h3 class="work-title">
-        <a href="https://github.com/ajaychanumolu/DeepTrace" target="_blank">DeepTrace: Multi-Modal Deepfake Detection</a>
-      </h3>
-      <p class="work-description">
-        Built a deepfake detection system combining ResNeXt+LSTM for video, CNN for audio, and DenseNet121 for images, achieving high accuracy across modalities.
-      </p>
-      <p class="work-extra">Python • PyTorch • TensorFlow • OpenCV</p>
-    </div>
+        <div class="bento-grid grid-2">
+            <div class="glass-card">
+                <div>
+                    <div class="project-header">
+                        <i data-lucide="video" class="folder-icon"></i>
+                        <div class="project-links">
+                            <a href="https://github.com/ajaychanumolu/DeepTrace" target="_blank"><i data-lucide="github"></i></a>
+                            <a href="#" target="_blank"><i data-lucide="external-link"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">DeepTrace: Deepfake Detection</h3>
+                    <p class="project-desc">
+                        A multi-modal detection system that analyzes Video (ResNeXt+LSTM), Audio (CNN), and Images (DenseNet121). 
+                        Achieves state-of-the-art accuracy in identifying synthetic media.
+                    </p>
+                </div>
+                <div class="project-tech-list">
+                    <span>Python</span>
+                    <span>PyTorch</span>
+                    <span>TensorFlow</span>
+                    <span>OpenCV</span>
+                </div>
+            </div>
 
-    <!-- Sclerosis Disease Prediction -->
-    <div class="glass-card work-item">
-      <h3 class="work-title">
-        <a href="https://github.com/ajaychanumolu/Sclerosis_Disease_Prediction" target="_blank">Sclerosis Disease Prediction</a>
-      </h3>
-      <p class="work-description">
-        Developed a Random Forest Classifier with RFE and hyperparameter tuning to predict sclerosis progression with 87.2% accuracy, evaluated using ROC-AUC.
-      </p>
-      <p class="work-extra">Scikit-learn • Pandas • Matplotlib • Gradio</p>
-    </div>
+            <div class="glass-card">
+                <div>
+                    <div class="project-header">
+                        <i data-lucide="file-text" class="folder-icon"></i>
+                        <div class="project-links">
+                            <a href="https://github.com/ajaychanumolu/Chat-with-PDF-using-AI-n8n-Workflow" target="_blank"><i data-lucide="github"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">RAG PDF Chatbot</h3>
+                    <p class="project-desc">
+                        An automated RAG pipeline built with n8n. It ingests PDFs, creates embeddings using Gemini API, stores them in Pinecone Vector DB, and allows users to query documents naturally.
+                    </p>
+                </div>
+                <div class="project-tech-list">
+                    <span>n8n</span>
+                    <span>Gemini API</span>
+                    <span>Pinecone</span>
+                    <span>Vector DB</span>
+                </div>
+            </div>
 
-    <!-- Chat with PDF using AI -->
-    <div class="glass-card work-item">
-      <h3 class="work-title">
-        <a href="https://github.com/ajaychanumolu/Chat-with-PDF-using-AI-n8n-Workflow" target="_blank">Chat with PDF using AI</a>
-      </h3>
-      <p class="work-description">
-        Automated workflow to extract content from PDFs, embed using Gemini API, store in Pinecone vector DB, and answer user queries via AI.
-      </p>
-      <p class="work-extra">n8n • Gemini API • Pinecone • Google Drive</p>
-    </div>
+            <div class="glass-card">
+                <div>
+                    <div class="project-header">
+                        <i data-lucide="activity" class="folder-icon"></i>
+                        <div class="project-links">
+                            <a href="https://github.com/ajaychanumolu/Sclerosis_Disease_Prediction" target="_blank"><i data-lucide="github"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Sclerosis Disease Prediction</h3>
+                    <p class="project-desc">
+                        Developed a Random Forest Classifier with Recursive Feature Elimination (RFE) to predict sclerosis progression. 
+                        Achieved 87.2% accuracy with a Gradio web interface.
+                    </p>
+                </div>
+                <div class="project-tech-list">
+                    <span>Scikit-learn</span>
+                    <span>Gradio</span>
+                    <span>Matplotlib</span>
+                </div>
+            </div>
 
-    <!-- AI-Powered Tweet Summarizer -->
-    <div class="glass-card work-item">
-      <h3 class="work-title">
-        <a href="https://github.com/ajaychanumolu/tweet-summarizer-n8n" target="_blank">AI-Powered Tweet Summarizer</a>
-      </h3>
-      <p class="work-description">
-        Created a no-code workflow to extract tweets, summarize them with Gemini, analyze sentiment, and log results to Google Sheets.
-      </p>
-      <p class="work-extra">n8n • Apify • Gemini API • Google Sheets</p>
-    </div>
+            <div class="glass-card">
+                <div>
+                    <div class="project-header">
+                        <i data-lucide="mic" class="folder-icon"></i>
+                        <div class="project-links">
+                            <a href="#" target="_blank"><i data-lucide="github"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Speech Emotion Recognition</h3>
+                    <p class="project-desc">
+                        Final year project utilizing BiLSTM, CNNs, and Self-Attention mechanisms to classify human emotions from raw audio waveforms.
+                    </p>
+                </div>
+                <div class="project-tech-list">
+                    <span>Deep Learning</span>
+                    <span>Audio Processing</span>
+                    <span>BiLSTM</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  </div>
-</section>
+    <section class="container fade-in-section">
+        <div class="section-title-wrapper">
+            <span class="section-label">05. RECOGNITION</span>
+            <h2>Achievements</h2>
+        </div>
+        <div class="bento-grid grid-3">
+            <div class="glass-card" style="align-items: center; text-align: center;">
+                <div class="achievement-icon">🏆</div>
+                <h3>Executive Member</h3>
+                <p style="margin-bottom: 0;">ACE Club (2024-25)</p>
+            </div>
+            <div class="glass-card" style="align-items: center; text-align: center;">
+                <div class="achievement-icon">🤝</div>
+                <h3>Android Core Team</h3>
+                <p style="margin-bottom: 0;">Google DSC</p>
+            </div>
+            <div class="glass-card" style="align-items: center; text-align: center;">
+                <div class="achievement-icon">🎓</div>
+                <h3>Qualified IIT JEE</h3>
+                <p style="margin-bottom: 0;">National Level Exam</p>
+            </div>
+        </div>
+    </section>
 
+    <section id="resume" class="container fade-in-section">
+        <div class="resume-banner">
+            <h2>Ready to see the full picture?</h2>
+            <p style="max-width: 500px; margin: 0 auto 30px;">
+                Download my resume to get a detailed overview of my education, experience, and project history.
+            </p>
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                <a href="https://drive.google.com/file/d/1XM5zOodsVNGJmP6kr6YthlLjEeEQ4_fn/view?usp=sharing" target="_blank" class="btn btn-primary">
+                    <i data-lucide="eye"></i> View Resume
+                </a>
+                <a href="https://drive.google.com/file/d/1XM5zOodsVNGJmP6kr6YthlLjEeEQ4_fn/export?format=pdf" class="btn btn-secondary">
+                    <i data-lucide="download"></i> Download PDF
+                </a>
+            </div>
+        </div>
+    </section>
 
-    <!-- Achievements Section -->
-<section id="achievements" class="section fade-in">
-  <h2 class="section-title">Achievements & <span class="highlight">Recognition</span></h2>
-  <div class="grid grid-3">
-
-    <!-- ACE Executive -->
-    <div class="glass-card" style="text-align: center;">
-      <div class="achievement-icon">🏅</div>
-      <h3 class="achievement-title">Leadership in ACE Club</h3>
-      <p class="achievement-description">Serving as Executive Body Member of ACE (2024–25), leading technical and community initiatives.</p>
-    </div>
-
-    <!-- GDSC Android Core -->
-    <div class="glass-card" style="text-align: center;">
-      <div class="achievement-icon">🤝</div>
-      <h3 class="achievement-title">GDSC Android Core Member</h3>
-      <p class="achievement-description">Part of Google Developer Student Club Android Team, contributing to peer learning and workshops.</p>
-    </div>
-
-    <!-- IIT JEE Achievement -->
-    <div class="glass-card" style="text-align: center;">
-      <div class="achievement-icon">🎓</div>
-      <h3 class="achievement-title">Qualified IIT JEE</h3>
-      <p class="achievement-description">Secured a qualifying rank in India's prestigious IIT-JEE examination, demonstrating academic excellence and dedication.</p>
-    </div>
-
-  </div>
-</section>
-<!-- Resume Section -->
-<section id="resume" class="section fade-in">
-  <h2 class="section-title">My <span class="highlight">Resume</span></h2>
-  <div class="glass-card" style="text-align: center; padding: 20px;">
-    <p>You can view or download my resume below.</p>
-    <div style="margin-top: 20px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-      <a href="https://drive.google.com/file/d/15pRd_A7Iq2nzxGBFnl-IM5moe7LO9H1d/view?usp=sharing" target="_blank" class="resume-button">
-        📄 View Resume
-      </a>
-      <a href="https://drive.google.com/u/0/uc?id=15pRd_A7Iq2nzxGBFnl-IM5moe7LO9H1d&export=download" class="resume-button" download>
-        ⬇️ Download Resume
-      </a>
-    </div>
-  </div>
-</section>
-<!-- Contact Me Section -->
-<section id="contact" class="section fade-in">
-  <h2 class="section-title">Contact <span class="highlight">Me</span></h2>
-  <p style="text-align: center; margin-top: 10px;">Feel free to reach out via email or connect with me on LinkedIn.</p>
-  
-  <div style="margin-top: 20px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; font-size: 16px;">
-    <a href="mailto:chanumoluajay@gmail.com" style="text-decoration: none; color: #00bcd4;">📧 chanumoluajay@gmail.com</a>
-    <a href="https://www.linkedin.com/in/ajaychanumolu" target="_blank" style="text-decoration: none; color: #00bcd4;">🔗 LinkedIn</a>
-    <a href="tel:+918074177736" style="text-decoration: none; color: #00bcd4;">📱 +91 8074177736</a>
-  </div>
-</section>
-
+    <footer class="footer">
+        <div class="container">
+            <div class="contact-methods">
+                <a href="mailto:chanumoluajay@gmail.com" class="contact-link">
+                    <i data-lucide="mail"></i> chanumoluajay@gmail.com
+                </a>
+                <a href="tel:+918074177736" class="contact-link">
+                    <i data-lucide="phone"></i> +91 8074177736
+                </a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Ajay Chanumolu. Crafted with precision.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // Theme Toggle Functionality
-        function toggleTheme() {
-            const body = document.body;
-            const themeIcon = document.getElementById('theme-icon');
-            
-            if (body.getAttribute('data-theme') === 'dark') {
-                body.removeAttribute('data-theme');
-                themeIcon.textContent = '🌙';
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                themeIcon.textContent = '☀️';
-                localStorage.setItem('theme', 'dark');
-            }
-        }
+        // 1. Initialize Icons
+        lucide.createIcons();
 
-        // Load saved theme
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme');
-            const themeIcon = document.getElementById('theme-icon');
-            
-            if (savedTheme === 'dark') {
-                document.body.setAttribute('data-theme', 'dark');
-                themeIcon.textContent = '☀️';
-            }
-
-            // Hide loader
+        // 2. Loading Screen Logic
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
             setTimeout(() => {
-                document.getElementById('loader').style.opacity = '0';
+                loader.classList.add('hidden');
                 setTimeout(() => {
-                    document.getElementById('loader').style.display = 'none';
+                    loader.style.display = 'none';
                 }, 500);
-            }, 1500);
+            }, 1000);
         });
 
-        // Scroll animations
+        // 3. Theme Toggle Logic
+        const themeBtn = document.getElementById('theme-toggle');
+        const themeIcon = themeBtn.querySelector('i');
+        const html = document.documentElement;
+
+        function updateIcon() {
+            if (html.classList.contains('dark')) {
+                themeIcon.setAttribute('data-lucide', 'sun');
+            } else {
+                themeIcon.setAttribute('data-lucide', 'moon');
+            }
+            lucide.createIcons();
+        }
+
+        // Check local storage
+        if (localStorage.getItem('theme') === 'light') {
+            html.classList.remove('dark');
+        } else {
+            html.classList.add('dark');
+        }
+        updateIcon();
+
+        themeBtn.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            if (html.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+            updateIcon();
+        });
+
+        // 4. Intersection Observer for Fade In
         const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
         };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Only animate once
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
+        document.querySelectorAll('.fade-in-section').forEach(section => {
+            observer.observe(section);
         });
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+        // 5. Active Nav Link on Scroll
+        const sections = document.querySelectorAll("section, header");
+        const navLi = document.querySelectorAll(".nav-links a");
+
+        window.onscroll = () => {
+            var current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute("id");
                 }
             });
-        });
 
-        // Add hover effect to cards
-        document.querySelectorAll('.glass-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
+            navLi.forEach((a) => {
+                a.classList.remove("active");
+                if (a.getAttribute("href").includes(current) && current !== "") {
+                    a.classList.add("active");
+                }
             });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        // Parallax effect for floating shapes
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const shapes = document.querySelectorAll('.shape');
-            
-            shapes.forEach((shape, index) => {
-                const speed = 0.5 + (index * 0.1);
-                shape.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-        });
+        };
     </script>
-    <!-- 1. Add Lucide CDN in <head> -->
-<script src="https://unpkg.com/lucide@latest"></script>
-
-<!-- 2. HTML Button with Lucide Icon -->
-<button id="theme-toggle" onclick="toggleTheme()" class="theme-toggle-button" aria-label="Toggle theme">
-    <i id="theme-icon" data-lucide="moon"></i>
-</button>
-
-<!-- 3. CSS for Button Styling -->
-<style>
-.theme-toggle-button {
-    background: transparent;
-    border: none;
-    border-radius: 50%;
-    padding: 8px;
-    cursor: pointer;
-    font-size: 1.5rem;
-    color: var(--text-color, #222);
-    transition: transform 0.2s ease;
-}
-
-.theme-toggle-button:hover {
-    transform: scale(1.15);
-}
-
-.theme-toggle-button i {
-    width: 24px;
-    height: 24px;
-}
-</style>
-
-<!-- 4. JavaScript Logic for Theme Toggle -->
-<script>
-    function toggleTheme() {
-        const body = document.body;
-        const themeIcon = document.getElementById('theme-icon');
-
-        if (body.getAttribute('data-theme') === 'dark') {
-            body.removeAttribute('data-theme');
-            themeIcon.setAttribute('data-lucide', 'moon');
-            localStorage.setItem('theme', 'light');
-        } else {
-            body.setAttribute('data-theme', 'dark');
-            themeIcon.setAttribute('data-lucide', 'sun');
-            localStorage.setItem('theme', 'dark');
-        }
-
-        // Re-render the icon after change
-        lucide.createIcons();
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-        const savedTheme = localStorage.getItem('theme');
-        const themeIcon = document.getElementById('theme-icon');
-
-        if (savedTheme === 'dark') {
-            document.body.setAttribute('data-theme', 'dark');
-            themeIcon.setAttribute('data-lucide', 'sun');
-        } else {
-            themeIcon.setAttribute('data-lucide', 'moon');
-        }
-
-        // Initialize Lucide icons
-        lucide.createIcons();
-    });
-</script>
-
 </body>
-
 </html>
