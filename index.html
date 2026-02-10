@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="description" content="Portfolio of Ajay Chanumolu - AI/ML Engineer & Automation Developer">
     <title>Ajay Chanumolu | AI & Machine Learning Engineer</title>
     <link rel="icon" href="./assets/favicon.png" type="image/png">
 
@@ -16,223 +15,536 @@
 
     <style>
         /* ========================================
-           THEME VARIABLES
-           ======================================== */
+        1. THEME VARIABLES (The "21st.dev" Aesthetic)
+        ========================================
+        */
         :root {
+            /* Light Mode (Zinc) */
             --bg-body: #ffffff;
             --bg-subtle: #f4f4f5;
             --bg-card: #ffffff;
+            --bg-glass: rgba(255, 255, 255, 0.8);
+            
             --border-color: #e4e4e7;
+            --border-hover: #d4d4d8;
+            
             --text-primary: #18181b;
-            --text-secondary: #71717a;
+            --text-secondary: #52525b;
+            --text-muted: #a1a1aa;
+            
             --accent-primary: #4f46e5; /* Indigo 600 */
-            --accent-glow: rgba(79, 70, 229, 0.1);
-            --radius-md: 12px;
-            --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --accent-glow: rgba(79, 70, 229, 0.15);
+            --gradient-1: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-glow: 0 0 40px rgba(79, 70, 229, 0.2);
         }
 
         .dark {
-            --bg-body: #09090b; /* Deep Zinc Black */
-            --bg-subtle: #18181b;
-            --bg-card: #0c0c0e;
-            --border-color: #27272a;
-            --text-primary: #fafafa;
-            --text-secondary: #a1a1aa;
+            /* Dark Mode (Deep Zinc/Slate) */
+            --bg-body: #09090b; /* Zinc 950 */
+            --bg-subtle: #18181b; /* Zinc 900 */
+            --bg-card: #0c0c0e; /* Custom Dark */
+            --bg-glass: rgba(9, 9, 11, 0.6);
+            
+            --border-color: #27272a; /* Zinc 800 */
+            --border-hover: #3f3f46; /* Zinc 700 */
+            
+            --text-primary: #fafafa; /* Zinc 50 */
+            --text-secondary: #a1a1aa; /* Zinc 400 */
+            --text-muted: #52525b; /* Zinc 600 */
+            
             --accent-primary: #818cf8; /* Indigo 400 */
             --accent-glow: rgba(129, 140, 248, 0.15);
-            --shadow-card: none;
+            --gradient-1: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+            
+            --shadow-sm: none;
+            --shadow-lg: 0 0 0 1px var(--border-color);
+            --shadow-glow: 0 0 60px rgba(129, 140, 248, 0.15);
         }
 
         /* ========================================
-           RESET & BASE
-           ======================================== */
+        2. GLOBAL RESET & TYPOGRAPHY
+        ========================================
+        */
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         html { scroll-behavior: smooth; }
         
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-body);
             color: var(--text-primary);
-            line-height: 1.6;
+            line-height: 1.8; /* Increased line height */
             overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* Background Grid */
-        .bg-grid {
+        h1, h2, h3, h4 {
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        a { text-decoration: none; color: inherit; transition: all 0.2s ease; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        .highlight {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        /* ========================================
+        3. ANIMATED BACKGROUND (Restored Blobs)
+        ========================================
+        */
+        .bg-animation {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background-image: linear-gradient(to right, var(--border-color) 1px, transparent 1px),
-                              linear-gradient(to bottom, var(--border-color) 1px, transparent 1px);
-            background-size: 40px 40px;
-            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
-            -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
-            opacity: 0.1;
+            overflow: hidden;
             pointer-events: none;
         }
 
-        /* ========================================
-           UTILITIES
-           ======================================== */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-        .highlight { color: var(--accent-primary); font-weight: 600; }
-        a { text-decoration: none; color: inherit; transition: 0.2s; }
-        
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            border: 1px solid transparent;
-            font-size: 1rem;
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.25; /* Subtle opacity for classier look */
+            animation: float 20s infinite linear;
         }
+
+        .shape:nth-child(1) {
+            width: 500px; height: 500px;
+            background: var(--accent-primary);
+            top: -10%; left: -10%;
+            animation-duration: 25s;
+        }
+
+        .shape:nth-child(2) {
+            width: 400px; height: 400px;
+            background: #7c3aed; /* Violet */
+            bottom: 10%; right: -5%;
+            animation-duration: 30s;
+            animation-delay: -5s;
+        }
+
+        .shape:nth-child(3) {
+            width: 300px; height: 300px;
+            background: #2563eb; /* Blue */
+            top: 40%; left: 40%;
+            animation-duration: 35s;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -50px) rotate(120deg); }
+            66% { transform: translate(-20px, 40px) rotate(240deg); }
+        }
+
+        /* ========================================
+        4. LOADER
+        ========================================
+        */
+        .loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-body);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
+        }
+        
+        .loader.hidden { opacity: 0; visibility: hidden; }
+
+        .spinner {
+            width: 50px; height: 50px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ========================================
+        5. NAVIGATION (Floating Pill Style)
+        ========================================
+        */
+        .nav-wrapper {
+            position: fixed;
+            top: 30px;
+            left: 0; 
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .nav-pill {
+            background: var(--bg-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 100px;
+            padding: 12px 32px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+
+        .nav-pill:hover {
+            border-color: var(--accent-primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-primary);
+        }
+
+        /* Theme Toggle Button inside Nav */
+        .theme-toggle {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-color);
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-primary);
+            color: white;
+            border-color: var(--accent-primary);
+        }
+
+        /* ========================================
+        6. HEADER / HERO SECTION
+        ========================================
+        */
+        .hero {
+            padding-top: 180px; /* Big top padding */
+            padding-bottom: 120px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Profile Image with Glow */
+        .profile-wrapper {
+            position: relative;
+            width: 180px; height: 180px;
+            margin: 0 auto 48px;
+        }
+
+        .profile-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            animation: rotate 4s linear infinite;
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0.7;
+        }
+
+        .profile-img {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--bg-body);
+            background: var(--bg-subtle);
+        }
+
+        @keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            margin-bottom: 24px;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 48px;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            display: flex; align-items: center; gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
         .btn-primary {
             background: var(--text-primary);
             color: var(--bg-body);
+            border: 1px solid var(--text-primary);
         }
-        .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
-        
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.2);
+        }
+
         .btn-outline {
             background: transparent;
-            border-color: var(--border-color);
+            border: 1px solid var(--border-color);
             color: var(--text-primary);
         }
-        .btn-outline:hover { border-color: var(--text-primary); background: var(--bg-subtle); }
+
+        .btn-outline:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            background: var(--bg-subtle);
+        }
 
         /* ========================================
-           NAVIGATION
-           ======================================== */
-        .nav {
-            position: fixed; top: 0; width: 100%; height: 70px;
-            background: rgba(var(--bg-body), 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            display: flex; align-items: center;
+        7. SECTIONS & CARDS (Glass Effect)
+        ========================================
+        */
+        section {
+            padding: 120px 0; /* Massive spacing between sections */
         }
-        .nav-inner { display: flex; justify-content: space-between; width: 100%; align-items: center; }
-        
-        .logo { font-weight: 700; font-size: 1.25rem; display: flex; align-items: center; gap: 8px; }
-        .logo span { color: var(--accent-primary); }
 
-        .nav-links { display: flex; gap: 32px; list-style: none; }
-        .nav-links a { font-size: 0.95rem; color: var(--text-secondary); font-weight: 500; }
-        .nav-links a:hover { color: var(--text-primary); }
-
-        .theme-toggle {
-            background: transparent; border: 1px solid var(--border-color);
-            padding: 8px; border-radius: 50%; cursor: pointer;
-            color: var(--text-primary); display: flex; align-items: center; justify-content: center;
+        .section-header {
+            margin-bottom: 80px;
+            text-align: left;
         }
-        .theme-toggle:hover { border-color: var(--accent-primary); background: var(--bg-subtle); }
 
-        /* ========================================
-           HERO SECTION
-           ======================================== */
-        .hero { min-height: 90vh; display: flex; align-items: center; padding-top: 80px; }
-        .hero-content { max-width: 800px; }
-        
-        .status-badge {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 6px 12px; background: var(--accent-glow);
-            border: 1px solid rgba(129, 140, 248, 0.2);
-            border-radius: 50px; color: var(--accent-primary);
-            font-size: 0.85rem; font-weight: 600; margin-bottom: 24px;
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
         }
-        
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            line-height: 1.1; font-weight: 800; margin-bottom: 24px;
-            letter-spacing: -0.02em;
+
+        .section-header p {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-primary);
+            font-size: 1rem;
+            letter-spacing: 0.05em;
         }
-        
-        .hero p { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 32px; max-width: 600px; }
-        .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
 
-        /* ========================================
-           SECTIONS & CARDS
-           ======================================== */
-        section { padding: 80px 0; }
-        .section-header { margin-bottom: 48px; }
-        .section-header h2 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
-        .section-header p { color: var(--accent-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
-
-        .grid { display: grid; gap: 24px; }
-        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); }
-        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-
-        .card {
+        .glass-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 32px;
-            transition: transform 0.2s, border-color 0.2s;
-            box-shadow: var(--shadow-card);
+            border-radius: 24px;
+            padding: 40px; /* Large padding inside cards */
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
-        .card:hover { transform: translateY(-4px); border-color: var(--text-secondary); }
 
-        /* Timeline (Experience) */
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* ========================================
+        8. GRID LAYOUTS
+        ========================================
+        */
+        .grid {
+            display: grid;
+            gap: 32px; /* Bigger gap */
+        }
+
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+
+        /* ========================================
+        9. SKILLS STYLING
+        ========================================
+        */
+        .skill-group h3 {
+            font-size: 1.25rem;
+            margin-bottom: 24px;
+            display: flex; align-items: center; gap: 12px;
+            color: var(--text-primary);
+        }
+
+        .skill-tags {
+            display: flex; flex-wrap: wrap; gap: 12px;
+        }
+
+        .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: var(--bg-subtle);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .tag:hover {
+            color: var(--accent-primary);
+            border-color: var(--accent-primary);
+            background: var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        /* ========================================
+        10. EXPERIENCE & PROJECTS
+        ========================================
+        */
+        /* Experience */
         .timeline-item {
-            position: relative; padding-left: 32px; margin-bottom: 48px;
+            padding-left: 48px;
+            position: relative;
+            margin-bottom: 60px;
             border-left: 2px solid var(--border-color);
         }
+        
         .timeline-item::before {
-            content: ''; position: absolute; left: -6px; top: 6px;
-            width: 10px; height: 10px; background: var(--bg-body);
-            border: 2px solid var(--accent-primary); border-radius: 50%;
+            content: ''; position: absolute; left: -9px; top: 8px;
+            width: 16px; height: 16px; background: var(--bg-body);
+            border: 4px solid var(--accent-primary); border-radius: 50%;
+            transition: 0.3s;
         }
-        .role { font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; }
-        .company { color: var(--accent-primary); font-weight: 500; margin-bottom: 8px; }
-        .date { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px; }
-        .desc { color: var(--text-secondary); font-size: 1rem; }
 
-        /* Skills */
-        .skill-group h3 { font-size: 1.1rem; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-        .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-        .tag {
-            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
-            padding: 6px 12px; background: var(--bg-subtle);
-            border: 1px solid var(--border-color); border-radius: 6px;
-            color: var(--text-secondary); transition: 0.2s;
-        }
-        .tag:hover { color: var(--accent-primary); border-color: var(--accent-primary); background: var(--accent-glow); }
+        .timeline-item:hover::before { transform: scale(1.3); }
+
+        .job-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+        .company-name { color: var(--accent-primary); font-weight: 600; font-size: 1.1rem; margin-bottom: 12px; display: block; }
+        .job-desc { font-size: 1.1rem; color: var(--text-secondary); max-width: 800px; }
 
         /* Projects */
-        .project-card { display: flex; flex-direction: column; height: 100%; justify-content: space-between; }
-        .project-top { margin-bottom: 24px; }
-        .folder-icon { color: var(--accent-primary); margin-bottom: 20px; display: block; }
-        .project-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; }
-        .project-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
-        .project-tech { display: flex; gap: 12px; margin-top: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary); }
-
-        /* Animation Classes */
-        /* Note: We keep opacity: 1 by default so text shows even if JS breaks */
-        .fade-in { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-        .fade-in.hidden-start { opacity: 0; transform: translateY(20px); }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .grid-2, .grid-3 { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2.5rem; }
-            .hero-actions { flex-direction: column; width: 100%; }
-            .btn { width: 100%; justify-content: center; }
+        .project-header {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            margin-bottom: 24px;
         }
+        
+        .folder-icon { width: 48px; height: 48px; color: var(--accent-primary); }
+        
+        .project-links a {
+            color: var(--text-secondary);
+            transition: 0.3s;
+        }
+        .project-links a:hover { color: var(--text-primary); transform: scale(1.1); }
+
+        .project-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; }
+        .project-desc { font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 32px; flex-grow: 1; }
+
+        .tech-stack {
+            display: flex; gap: 16px; flex-wrap: wrap;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+            color: var(--text-muted); padding-top: 24px; border-top: 1px solid var(--border-color);
+        }
+
+        /* ========================================
+        11. RESUME & CONTACT
+        ========================================
+        */
+        .resume-section {
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-subtle) 100%);
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-links {
+            display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .contact-item {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 1.1rem; font-weight: 500;
+            color: var(--text-secondary);
+            padding: 16px 24px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .contact-item:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            background: var(--bg-subtle);
+        }
+
+        /* ========================================
+        12. RESPONSIVE
+        ========================================
+        */
+        @media (max-width: 900px) {
+            .nav-wrapper { top: auto; bottom: 20px; padding: 0 20px; }
+            .nav-pill { width: 100%; justify-content: space-between; padding: 16px 24px; }
+            .nav-links { display: none; } /* Hide links on mobile, keep theme toggle */
+            
+            .hero h1 { font-size: 3rem; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            
+            .container { padding: 0 24px; }
+            section { padding: 80px 0; }
+        }
+
+        /* Animation Keyframes for Reveal */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 
 <body>
-    <div class="bg-grid"></div>
 
-    <nav class="nav">
-        <div class="container nav-inner">
-            <a href="#" class="logo">Ajay Chanumolu<span>.</span></a>
+    <div class="bg-animation">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="loader" id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="nav-wrapper">
+        <nav class="nav-pill">
+            <a href="#" style="font-weight: 700; font-size: 1.2rem;">Ajay<span style="color: var(--accent-primary)">.</span></a>
+            
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
@@ -240,257 +552,338 @@
                 <li><a href="#projects">Work</a></li>
                 <li><a href="#resume">Resume</a></li>
             </ul>
-            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme">
-                <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-                <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-            </button>
-        </div>
-    </nav>
 
-    <header class="container hero fade-in hidden-start">
-        <div class="hero-content">
-            <div class="status-badge">
-                <span style="width: 8px; height: 8px; background: currentColor; border-radius: 50%; display: inline-block;"></span>
-                Open to Work & Collaborations
-            </div>
-            <h1>Building Intelligent<br><span class="highlight">Systems & Automations.</span></h1>
-            <p>I'm Ajay Chanumolu, an <strong>AI Automation Intern at BeAble Health</strong>. I build scalable workflows using Python, n8n, and GenAI to solve real-world problems.</p>
-            <div class="hero-actions">
-                <a href="#projects" class="btn btn-primary">View Projects</a>
-                <a href="https://linkedin.com/in/ajaychanumolu" target="_blank" class="btn btn-outline">LinkedIn</a>
-                <a href="https://github.com/ajaychanumolu" target="_blank" class="btn btn-outline">GitHub</a>
-            </div>
+            <button class="theme-toggle" id="theme-btn" aria-label="Toggle Theme">
+                <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+            </button>
+        </nav>
+    </div>
+
+    <header class="container hero">
+        <div class="profile-wrapper">
+            <img src="./assets/ajay-avatar.png" alt="Ajay Chanumolu" class="profile-img">
+        </div>
+
+        <h3 style="color: var(--accent-primary); font-weight: 600; margin-bottom: 16px; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem;">
+            Portfolio '26
+        </h3>
+        
+        <h1>
+            Engineering the Future with <br>
+            <span class="highlight">AI & Automation.</span>
+        </h1>
+        
+        <p>
+            I'm <strong>Ajay Chanumolu</strong>, an AI Automation Intern at <strong>BeAble Health</strong>. 
+            I specialize in building intelligent workflows using Python, n8n, and GenAI to solve complex real-world problems.
+        </p>
+
+        <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">
+                View Projects <i data-lucide="arrow-right"></i>
+            </a>
+            <a href="https://linkedin.com/in/ajaychanumolu" target="_blank" class="btn btn-outline">
+                <i data-lucide="linkedin"></i> LinkedIn
+            </a>
+            <a href="https://github.com/ajaychanumolu" target="_blank" class="btn btn-outline">
+                <i data-lucide="github"></i> GitHub
+            </a>
         </div>
     </header>
 
-    <section id="about" class="container fade-in hidden-start">
+    <section id="about" class="container reveal">
         <div class="section-header">
-            <p>01. ABOUT ME</p>
-            <h2>Who I Am</h2>
+            <p>01. INTRODUCTION</p>
+            <h2>About Me</h2>
         </div>
-        <div class="card">
-            <p style="margin-bottom: 20px; font-size: 1.1rem; color: var(--text-primary);">
-                I am a final-year B.Tech student in <strong>Artificial Intelligence and Machine Learning</strong> at SRKREC. My passion lies in bridging the gap between complex AI models and practical business applications.
+        <div class="glass-card">
+            <p style="font-size: 1.2rem; color: var(--text-primary); margin-bottom: 24px;">
+                I am a final-year B.Tech student in <strong>Artificial Intelligence and Machine Learning</strong> at SRKREC with a passion for building systems that just work.
             </p>
-            <p style="color: var(--text-secondary);">
-                Currently, I am working as an intern at <strong>BeAble Health</strong>, where I automate content generation and operational workflows. I previously interned at <strong>Truviq Systems</strong> and <strong>Takshalabs</strong>, gaining experience in Cloud Computing (AWS/Azure) and End-to-End Development. I also serve as an Executive Body Member of the ACE Club, organizing technical events and workshops.
+            <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0;">
+                My journey involves bridging the gap between theoretical AI models and practical automation. From detecting deepfakes with multi-modal neural networks to automating recruitment pipelines using n8n and LLMs, I focus on efficiency and scalability. Currently, I am applying these skills at <strong>BeAble Health</strong>, while also leading technical initiatives as an Executive Member of the ACE Club.
             </p>
         </div>
     </section>
 
-    <section id="skills" class="container fade-in hidden-start">
+    <section id="skills" class="container reveal">
         <div class="section-header">
-            <p>02. TECHNICAL ARSENAL</p>
+            <p>02. TECH STACK</p>
             <h2>Skills & Technologies</h2>
         </div>
         <div class="grid grid-2">
-            <div class="card skill-group">
-                <h3>Machine Learning</h3>
+            <div class="glass-card skill-group">
+                <h3><i data-lucide="brain-circuit" style="color:var(--accent-primary)"></i> Machine Learning</h3>
                 <div class="skill-tags">
                     <span class="tag">Python</span>
                     <span class="tag">TensorFlow</span>
                     <span class="tag">PyTorch</span>
                     <span class="tag">Scikit-learn</span>
                     <span class="tag">Pandas</span>
-                    <span class="tag">OpenCV</span>
+                    <span class="tag">Matplotlib</span>
                 </div>
             </div>
-            <div class="card skill-group">
-                <h3>Automation & Cloud</h3>
+
+            <div class="glass-card skill-group">
+                <h3><i data-lucide="workflow" style="color:var(--accent-primary)"></i> Automation & Cloud</h3>
                 <div class="skill-tags">
                     <span class="tag">n8n</span>
                     <span class="tag">Docker</span>
-                    <span class="tag">AWS EC2</span>
+                    <span class="tag">AWS (EC2/S3)</span>
                     <span class="tag">Azure</span>
                     <span class="tag">Google Cloud</span>
-                    <span class="tag">Git</span>
+                    <span class="tag">Git & GitHub</span>
                 </div>
             </div>
-            <div class="card skill-group">
-                <h3>GenAI & Web</h3>
+
+            <div class="glass-card skill-group">
+                <h3><i data-lucide="sparkles" style="color:var(--accent-primary)"></i> Generative AI</h3>
                 <div class="skill-tags">
                     <span class="tag">Gemini API</span>
                     <span class="tag">LangChain</span>
-                    <span class="tag">Pinecone</span>
-                    <span class="tag">Streamlit</span>
+                    <span class="tag">Pinecone (Vector DB)</span>
+                    <span class="tag">Hugging Face</span>
                     <span class="tag">Gradio</span>
-                    <span class="tag">Java</span>
+                    <span class="tag">Streamlit</span>
                 </div>
             </div>
-             <div class="card skill-group">
-                <h3>CS Fundamentals</h3>
+
+             <div class="glass-card skill-group">
+                <h3><i data-lucide="code-2" style="color:var(--accent-primary)"></i> CS Fundamentals</h3>
                 <div class="skill-tags">
                     <span class="tag">Data Structures</span>
                     <span class="tag">Algorithms</span>
-                    <span class="tag">OOPs</span>
+                    <span class="tag">OOPs (Java)</span>
                     <span class="tag">DBMS (SQL)</span>
+                    <span class="tag">Operating Systems</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="experience" class="container fade-in hidden-start">
+    <section id="experience" class="container reveal">
         <div class="section-header">
-            <p>03. EXPERIENCE</p>
-            <h2>Where I've Worked</h2>
+            <p>03. CAREER HISTORY</p>
+            <h2>Experience</h2>
         </div>
-        <div style="max-width: 800px;">
+        
+        <div style="max-width: 900px; margin: 0 auto;">
             <div class="timeline-item">
-                <div class="role">AI Automation Intern</div>
-                <div class="company">BeAble Health Pvt Ltd</div>
-                <div class="date">Nov 2025 – Present</div>
-                <p class="desc">Spearheading automation initiatives using n8n and Python. Developing intelligent agents to streamline content generation and operational workflows.</p>
+                <div class="job-title">AI Automation Intern</div>
+                <span class="company-name">BeAble Health Pvt Ltd • Nov 2025 - Present</span>
+                <p class="job-desc">
+                    Spearheading automation initiatives to streamline operational workflows. Developing intelligent agents and optimizing processes using cutting-edge AI tools like n8n and Python scripts.
+                </p>
             </div>
+
             <div class="timeline-item">
-                <div class="role">AI Automation Intern</div>
-                <div class="company">Truviq Systems</div>
-                <div class="date">May 2025 – July 2025</div>
-                <p class="desc">Implemented end-to-end automation pipelines. Integrated Large Language Models (LLMs) into business logic to enhance product capabilities.</p>
+                <div class="job-title">AI Automation Intern</div>
+                <span class="company-name">Truviq Systems • May 2025 - July 2025</span>
+                <p class="job-desc">
+                    Engineered end-to-end automation pipelines. Collaborated with cross-functional teams to integrate Large Language Models (LLMs) into existing business logic to enhance product capabilities.
+                </p>
             </div>
+
             <div class="timeline-item">
-                <div class="role">Cloud Intern</div>
-                <div class="company">Takshalabs</div>
-                <div class="date">Feb 2024 – May 2024</div>
-                <p class="desc">Gained hands-on experience with AWS and Azure cloud infrastructure. Deployed scalable applications and managed virtual environments.</p>
+                <div class="job-title">Cloud Intern</div>
+                <span class="company-name">Takshalabs • Feb 2024 - May 2024</span>
+                <p class="job-desc">
+                    Gained hands-on experience with AWS and Azure cloud infrastructure. Deployed scalable applications, managed virtual machines, and implemented security best practices.
+                </p>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="container fade-in hidden-start">
+    <section id="projects" class="container reveal">
         <div class="section-header">
-            <p>04. PORTFOLIO</p>
-            <h2>Featured Projects</h2>
+            <p>04. FEATURED WORK</p>
+            <h2>Projects</h2>
         </div>
+
         <div class="grid grid-2">
-            <div class="card project-card">
-                <div class="project-top">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-                    <h3 class="project-title"><a href="https://github.com/ajaychanumolu/DeepTrace" target="_blank">DeepTrace: Deepfake Detection</a></h3>
-                    <p class="project-desc">A robust multi-modal system detecting deepfakes across video (ResNeXt+LSTM), audio (CNN), and images (DenseNet121). Achieves high accuracy on complex datasets.</p>
+            <div class="glass-card">
+                <div class="project-header">
+                    <i data-lucide="video" class="folder-icon"></i>
+                    <div class="project-links">
+                        <a href="https://github.com/ajaychanumolu/DeepTrace" target="_blank"><i data-lucide="github" size="24"></i></a>
+                    </div>
                 </div>
-                <div class="project-tech">
-                    <span>Python</span><span>PyTorch</span><span>OpenCV</span>
-                </div>
-            </div>
-            <div class="card project-card">
-                <div class="project-top">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                    <h3 class="project-title"><a href="https://github.com/ajaychanumolu/Chat-with-PDF-using-AI-n8n-Workflow" target="_blank">RAG PDF Chatbot</a></h3>
-                    <p class="project-desc">Automated workflow using n8n to ingest PDFs, generate embeddings via Gemini API, store in Pinecone, and answer user queries with context-aware AI.</p>
-                </div>
-                <div class="project-tech">
-                    <span>n8n</span><span>Gemini API</span><span>Pinecone</span>
+                <h3 class="project-title">DeepTrace: Multi-Modal Deepfake Detection</h3>
+                <p class="project-desc">
+                    A comprehensive deepfake detection system. It combines ResNeXt+LSTM for video analysis, CNNs for audio spectral analysis, and DenseNet121 for frame-by-frame image detection. Achieves state-of-the-art accuracy.
+                </p>
+                <div class="tech-stack">
+                    <span>Python</span><span>PyTorch</span><span>TensorFlow</span><span>OpenCV</span>
                 </div>
             </div>
-            <div class="card project-card">
-                <div class="project-top">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                    <h3 class="project-title"><a href="https://github.com/ajaychanumolu/Sclerosis_Disease_Prediction" target="_blank">Disease Prediction</a></h3>
-                    <p class="project-desc">Developed a Random Forest Classifier with Recursive Feature Elimination (RFE) to predict sclerosis progression with 87.2% accuracy. Includes a web UI.</p>
+
+            <div class="glass-card">
+                <div class="project-header">
+                    <i data-lucide="file-text" class="folder-icon"></i>
+                    <div class="project-links">
+                        <a href="https://github.com/ajaychanumolu/Chat-with-PDF-using-AI-n8n-Workflow" target="_blank"><i data-lucide="github" size="24"></i></a>
+                    </div>
                 </div>
-                <div class="project-tech">
+                <h3 class="project-title">RAG PDF Chatbot with n8n</h3>
+                <p class="project-desc">
+                    An automated workflow to "Chat with your PDF". It ingests documents, generates vector embeddings using the Gemini API, stores them in Pinecone, and retrieves context to answer user queries accurately.
+                </p>
+                <div class="tech-stack">
+                    <span>n8n</span><span>Gemini API</span><span>Pinecone</span><span>Vector DB</span>
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <div class="project-header">
+                    <i data-lucide="activity" class="folder-icon"></i>
+                    <div class="project-links">
+                        <a href="https://github.com/ajaychanumolu/Sclerosis_Disease_Prediction" target="_blank"><i data-lucide="github" size="24"></i></a>
+                    </div>
+                </div>
+                <h3 class="project-title">Sclerosis Disease Prediction</h3>
+                <p class="project-desc">
+                    Developed a Random Forest Classifier enhanced with Recursive Feature Elimination (RFE) to predict sclerosis progression. The model achieved 87.2% accuracy and is deployed via a Gradio interface.
+                </p>
+                <div class="tech-stack">
                     <span>Scikit-learn</span><span>Gradio</span><span>Matplotlib</span>
                 </div>
             </div>
-            <div class="card project-card">
-                <div class="project-top">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-                    <h3 class="project-title">Speech Emotion Recognition</h3>
-                    <p class="project-desc">Final year project utilizing BiLSTM, CNNs, and Self-Attention mechanisms to accurately classify human emotions from raw audio waveforms.</p>
+
+            <div class="glass-card">
+                <div class="project-header">
+                    <i data-lucide="mic" class="folder-icon"></i>
+                    <div class="project-links">
+                        <a href="#" target="_blank"><i data-lucide="github" size="24"></i></a>
+                    </div>
                 </div>
-                <div class="project-tech">
-                    <span>Deep Learning</span><span>Audio</span><span>BiLSTM</span>
+                <h3 class="project-title">Speech Emotion Recognition</h3>
+                <p class="project-desc">
+                    Final year project focused on audio processing. Utilizes a hybrid architecture of BiLSTM, CNNs, and Self-Attention mechanisms to classify human emotions from raw audio signals with high precision.
+                </p>
+                <div class="tech-stack">
+                    <span>Deep Learning</span><span>Audio Processing</span><span>BiLSTM</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="resume" class="container fade-in hidden-start">
-        <div class="card" style="text-align: center; border-color: var(--accent-primary); background: linear-gradient(135deg, var(--bg-card), var(--bg-subtle));">
-            <h2 style="margin-bottom: 16px;">Ready to see the full details?</h2>
-            <p style="margin-bottom: 32px;">Download my resume to get a comprehensive overview of my education and experience.</p>
-            <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
-                <a href="https://drive.google.com/file/d/1XM5zOodsVNGJmP6kr6YthlLjEeEQ4_fn/view?usp=sharing" target="_blank" class="btn btn-primary">View Resume</a>
-                <a href="https://drive.google.com/file/d/1XM5zOodsVNGJmP6kr6YthlLjEeEQ4_fn/export?format=pdf" class="btn btn-outline">Download PDF</a>
+    <section class="container reveal">
+        <div class="section-header">
+            <p>05. RECOGNITION</p>
+            <h2>Achievements</h2>
+        </div>
+        <div class="grid grid-3">
+            <div class="glass-card" style="text-align: center; align-items: center;">
+                <div style="font-size: 3rem; margin-bottom: 16px;">🏅</div>
+                <h3 style="font-size: 1.2rem; margin-bottom: 8px;">ACE Club Executive</h3>
+                <p style="color: var(--text-secondary);">Leading technical events (2024-25)</p>
+            </div>
+            <div class="glass-card" style="text-align: center; align-items: center;">
+                <div style="font-size: 3rem; margin-bottom: 16px;">🤝</div>
+                <h3 style="font-size: 1.2rem; margin-bottom: 8px;">GDSC Android Core</h3>
+                <p style="color: var(--text-secondary);">Member of Google Developer Student Club</p>
+            </div>
+            <div class="glass-card" style="text-align: center; align-items: center;">
+                <div style="font-size: 3rem; margin-bottom: 16px;">🎓</div>
+                <h3 style="font-size: 1.2rem; margin-bottom: 8px;">IIT JEE Qualified</h3>
+                <p style="color: var(--text-secondary);">Ranked in National Entrance Exam</p>
             </div>
         </div>
     </section>
 
-    <footer style="border-top: 1px solid var(--border-color); padding: 60px 0; margin-top: 60px; text-align: center;">
-        <div class="container">
-            <h2 style="font-size: 1.5rem; margin-bottom: 24px;">Let's Connect</h2>
-            <div style="display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-bottom: 40px;">
-                <a href="mailto:chanumoluajay@gmail.com" style="color: var(--text-secondary); display: flex; align-items: center; gap: 8px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                    chanumoluajay@gmail.com
+    <section id="resume" class="container reveal">
+        <div class="glass-card resume-section">
+            <h2 style="margin-bottom: 16px;">Ready to see the full picture?</h2>
+            <p style="margin-bottom: 40px; color: var(--text-secondary);">
+                Download my resume to get a detailed overview of my education, experience, and project history.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
+                <a href="https://drive.google.com/file/d/1XM5zOodsVNGJmP6kr6YthlLjEeEQ4_fn/view?usp=sharing" target="_blank" class="btn btn-primary">
+                    <i data-lucide="eye"></i> View Resume
                 </a>
-                <a href="https://linkedin.com/in/ajaychanumolu" target="_blank" style="color: var(--text-secondary); display: flex; align-items: center; gap: 8px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                    LinkedIn
-                </a>
-                <a href="tel:+918074177736" style="color: var(--text-secondary); display: flex; align-items: center; gap: 8px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                    +91 8074177736
+                <a href="https://drive.google.com/file/d/1XM5zOodsVNGJmP6kr6YthlLjEeEQ4_fn/export?format=pdf" class="btn btn-outline">
+                    <i data-lucide="download"></i> Download PDF
                 </a>
             </div>
-            <p style="color: var(--text-secondary); font-size: 0.9rem;">&copy; 2026 Ajay Chanumolu. Built with Code.</p>
+        </div>
+    </section>
+
+    <footer style="border-top: 1px solid var(--border-color); padding: 80px 0; background: var(--bg-subtle);">
+        <div class="container" style="text-align: center;">
+            <h2 style="font-size: 2rem; margin-bottom: 40px;">Let's Connect</h2>
+            
+            <div class="contact-links">
+                <a href="mailto:chanumoluajay@gmail.com" class="contact-item">
+                    <i data-lucide="mail"></i> chanumoluajay@gmail.com
+                </a>
+                <a href="tel:+918074177736" class="contact-item">
+                    <i data-lucide="phone"></i> +91 8074177736
+                </a>
+            </div>
+
+            <p style="margin-top: 60px; color: var(--text-muted); font-size: 0.9rem;">
+                &copy; 2026 Ajay Chanumolu. Built with Code.
+            </p>
         </div>
     </footer>
 
     <script>
-        // Use try-catch to ensure one error doesn't break everything
-        try {
-            const html = document.documentElement;
-            const themeBtn = document.getElementById('theme-toggle');
-            const sunIcon = document.getElementById('sun-icon');
-            const moonIcon = document.getElementById('moon-icon');
+        // 1. Initialize Icons
+        lucide.createIcons();
 
-            // 1. Theme Logic
-            function applyTheme(isDark) {
-                if (isDark) {
-                    html.classList.add('dark');
-                    sunIcon.style.display = 'block';
-                    moonIcon.style.display = 'none';
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    html.classList.remove('dark');
-                    sunIcon.style.display = 'none';
-                    moonIcon.style.display = 'block';
-                    localStorage.setItem('theme', 'light');
-                }
-            }
+        // 2. Loader Logic
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                setTimeout(() => { loader.style.display = 'none'; }, 500);
+            }, 1000);
+        });
 
-            // Initialize Theme
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'light') {
-                applyTheme(false);
+        // 3. Theme Toggle Logic (Instant & Robust)
+        const html = document.documentElement;
+        const themeBtn = document.getElementById('theme-btn');
+        const sun = document.getElementById('sun');
+        const moon = document.getElementById('moon');
+
+        function applyTheme(isDark) {
+            if (isDark) {
+                html.classList.add('dark');
+                sun.style.display = 'block';
+                moon.style.display = 'none';
+                localStorage.setItem('theme', 'dark');
             } else {
-                applyTheme(true); // Default to dark
+                html.classList.remove('dark');
+                sun.style.display = 'none';
+                moon.style.display = 'block';
+                localStorage.setItem('theme', 'light');
             }
-
-            // Toggle Listener
-            themeBtn.addEventListener('click', () => {
-                const isDark = html.classList.contains('dark');
-                applyTheme(!isDark);
-            });
-
-            // 2. Fade In Animation (Robust)
-            const observerOptions = { threshold: 0.1 };
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-            
-        } catch (error) {
-            console.error("JS Error:", error);
-            // Fallback: Make everything visible if JS fails
-            document.querySelectorAll('.hidden-start').forEach(el => el.classList.remove('hidden-start'));
         }
+
+        // Check Local Storage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            applyTheme(false);
+        } else {
+            applyTheme(true); // Default to Dark
+        }
+
+        themeBtn.addEventListener('click', () => {
+            const isDark = html.classList.contains('dark');
+            applyTheme(!isDark);
+        });
+
+        // 4. Scroll Reveal Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
